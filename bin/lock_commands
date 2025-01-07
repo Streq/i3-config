@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# Main menu options
+logout="Log Out"
+suspend="Suspend"
+poweroff="Power Off"
+
+# If no argument is passed, show the main menu
+if [[ -z "$1" ]]; then
+    echo "$logout"
+    echo "$suspend"
+    echo "$poweroff"
+    exit 0
+fi
+
+# Handle the selected option
+case "$1" in
+    "$logout")
+        if [ "$DESKTOP_SESSION" = "i3" ]; then
+            i3-msg exit
+        elif [ "$DESKTOP_SESSION" = "gnome" ]; then
+            gnome-session-quit --logout --no-prompt
+        elif [ "$DESKTOP_SESSION" = "plasma" ]; then
+            qdbus org.kde.ksmserver /KSMServer logout 0 0 0
+        else
+            notify-send "Log Out failed" "Unsupported desktop environment"
+        fi
+        ;;
+    "$suspend")
+        systemctl suspend
+        ;;
+    "$poweroff")
+        systemctl poweroff
+        ;;
+    *)
+        exit 0
+        ;;
+esac
+

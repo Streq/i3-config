@@ -1,0 +1,80 @@
+set $HOME /home/santiagorequena
+set $mod Mod4
+set $alt Mod1
+set $TERMINAL terminator
+
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+font pango:monospace 8
+
+# This font is widely installed, provides lots of unicode glyphs, right-to-left
+# text rendering and scalability on retina/hidpi displays (thanks to pango).
+#font pango:DejaVu Sans Mono 8
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+        status_command i3status
+}
+
+
+focus_follows_mouse no
+mouse_warping none
+focus_wrapping no
+gaps inner 0
+smart_gaps on
+for_window [all] title_window_icon on
+hide_edge_borders smart
+
+# Create variables from Xresources for wm look
+set_from_resource $focused.color.border wm.client.focused.color.border "#002b36"
+set_from_resource $focused.color.background wm.client.focused.color.background "#586e75"
+set_from_resource $focused.color.text wm.client.focused.color.text "#fdf6e3"
+set_from_resource $focused.color.indicator wm.client.focused.color.indicator "#268bd2"
+set_from_resource $focused.color.child_border wm.client.focused.color.child_border
+
+set_from_resource $focused_inactive.color.border wm.client.focused_inactive.color.border "#002b36"
+set_from_resource $focused_inactive.color.background wm.client.focused_inactive.color.background "#073642"
+set_from_resource $focused_inactive.color.text wm.client.focused_inactive.color.text "#839496"
+set_from_resource $focused_inactive.color.indicator wm.client.focused_inactive.color.indicator "#073642"
+set_from_resource $focused_inactive.color.child_border wm.client.focused_inactive.color.child_border
+
+set_from_resource $unfocused.color.border wm.client.unfocused.color.border "#002b36"
+set_from_resource $unfocused.color.background wm.client.unfocused.color.background "#073642"
+set_from_resource $unfocused.color.text wm.client.unfocused.color.text "#839496"
+set_from_resource $unfocused.color.indicator wm.client.unfocused.color.indicator "#073642"
+set_from_resource $unfocused.color.child_border wm.client.unfocused.color.child_border
+
+set_from_resource $urgent.color.border wm.client.urgent.color.border "#002b36"
+set_from_resource $urgent.color.background wm.client.urgent.color.background "#dc322f"
+set_from_resource $urgent.color.text wm.client.urgent.color.text "#fdf6e3"
+set_from_resource $urgent.color.indicator wm.client.urgent.color.indicator "#002b36"
+set_from_resource $urgent.color.child_border wm.client.urgent.color.child_border
+
+
+# Window Border color
+# class                 border                             background                         text                               indicator                          child_border
+client.focused          $focused.color.border              $focused.color.background          $focused.color.text                $focused.color.indicator           $focused.color.child_border
+client.focused_inactive $focused_inactive.color.border     $focused_inactive.color.background $focused_inactive.color.text       $focused_inactive.color.indicator  $focused_inactive.color.child_border
+client.unfocused        $unfocused.color.border            $unfocused.color.background        $unfocused.color.text              $unfocused.color.indicator         $unfocused.color.child_border
+client.urgent           $urgent.color.border               $urgent.color.background           $urgent.color.text                 $urgent.color.indicator            $urgent.color.child_border
+
+include ~/.config/i3/config.d/*
+

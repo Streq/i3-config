@@ -1,0 +1,478 @@
+partial alphanumeric_keys
+xkb_symbols "base" {
+    include "es(basic)"
+    name[Group1] = "Streq";
+    
+    include "streq(punctuation)"
+    include "streq(num_row)"
+    include "streq(altgr)"
+
+    //mods
+    include "streq(swap_caps_with_backspace)"
+    //include "streq(tilde_is_backspace)"
+    // include "streq(less_is_shift)"
+    
+    include "streq(i3_switch_layout_key)"
+
+};
+
+partial alphanumeric_keys
+xkb_symbols "qwerty" {
+    include "streq(base)"
+    include "streq(qwerty_mod)"
+};
+
+partial alphanumeric_keys
+xkb_symbols "colemak" {
+    include "streq(base)"
+    include "streq(colemak_mod)"
+
+};
+
+partial alphanumeric_keys
+xkb_symbols "canary" {
+    include "streq(base)"
+    include "streq(canary_mod)"
+
+};
+
+default partial alphanumeric_keys
+xkb_symbols "colemak_dh" {
+    include "streq(base)"
+    include "streq(colemak_dh_mod)"
+
+};
+
+
+partial alphanumeric_keys
+xkb_symbols "i3_switch_layout_key" {
+    //Using an i3 config that maps ISO_Last_Group to a setxkbmap command
+    key <RWIN> { [ ISO_Last_Group, ISO_Last_Group, ISO_Last_Group, ISO_Last_Group ] };
+};
+
+partial alphanumeric_keys
+xkb_symbols "navigation" {
+    key <CAPS> { 
+        symbols[Group1] = [ VoidSymbol, VoidSymbol, VoidSymbol, VoidSymbol ],
+        actions[Group1] = [ LockControls(controls=MouseKeys), LockControls(controls=MouseKeys), LockControls(controls=MouseKeys), LockControls(controls=MouseKeys) ]
+    };
+
+    key <AC01> { [ Down, Down, Down, Down ] };
+    key <AC02> { [ Left, Left, Left, Left ] };
+    key <AC03> { [ Up, Up, Up, Up ] };
+    key <AC04> { [ Right, Right, Right, Right ] };
+
+    key <AC07> { [ Left, Left, Left, Left ] };
+    key <AC08> { [ Up, Up, Up, Up ] };
+    key <AC09> { [ Right, Right, Right, Right ] };
+    key <AC10> { [ Down, Down, Down, Down ] };
+    key <AC11> { [ BackSpace, BackSpace, BackSpace, BackSpace ] };
+
+    
+    key <SPCE> { [ Return, Return, Return, Return] };
+
+    include "streq(i3_switch_layout_key)"
+
+};
+
+
+partial alphanumeric_keys
+xkb_symbols "num_row" {
+    key <AE01>  { [         1,     NoSymbol,    NoSymbol, NoSymbol ] };
+    key <AE02>  { [         2,     NoSymbol,      NoSymbol, NoSymbol ] };
+    key <AE03>  { [         3,     semicolon,     NoSymbol, NoSymbol ] };
+    key <AE04>  { [         4,     NoSymbol,     NoSymbol, NoSymbol ] };
+    key <AE05>  { [         5,     NoSymbol,    NoSymbol, NoSymbol ] };
+    key <AE06>  { [         6,     NoSymbol,   NoSymbol, NoSymbol ] };
+    key <AE07>  { [         7,     NoSymbol,  NoSymbol, NoSymbol ] };
+    key <AE08>  { [         8,     NoSymbol,     NoSymbol, NoSymbol ] };
+    key <AE09>  { [         9,     NoSymbol,    NoSymbol, NoSymbol ] };
+    key <AE10>  { [         0,     NoSymbol,         NoSymbol, NoSymbol ] };
+    key <AE11>  { [      less,     question,  NoSymbol, NoSymbol ] };
+    key <AE12>  { [   greater,     exclam,    NoSymbol, NoSymbol ] };
+};
+
+
+partial alphanumeric_keys
+xkb_symbols "punctuation" {
+    
+    
+    //UPPER
+
+    key <AD01> { [ NoSymbol, NoSymbol, NoSymbol, NoSymbol ] };
+    key <AD02> { [ NoSymbol, NoSymbol, NoSymbol, NoSymbol ] };
+    key <AD03> { [ NoSymbol, NoSymbol, NoSymbol, NoSymbol ] };
+    key <AD04> { [ NoSymbol, NoSymbol, NoSymbol, NoSymbol ] };
+
+    key <AD05> { [ NoSymbol, NoSymbol, NoSymbol, NoSymbol ] };
+    key <AD06> { [ NoSymbol, NoSymbol, NoSymbol, NoSymbol ] };
+
+    key <AD07> { [ NoSymbol, NoSymbol, NoSymbol, NoSymbol ] };
+    key <AD08> { [ NoSymbol, NoSymbol, NoSymbol, NoSymbol ] };
+    key <AD09> { [ NoSymbol, NoSymbol, NoSymbol, NoSymbol ] };
+    key <AD10> { [ NoSymbol, NoSymbol, NoSymbol, NoSymbol ] };
+
+    key <AD11> { [ apostrophe, quotedbl, NoSymbol, NoSymbol ] };
+    key <AD12> { [ plus, asterisk , NoSymbol, NoSymbol ] };
+
+
+    ////HOME
+
+    key <AC01> { [ NoSymbol, NoSymbol, NoSymbol, NoSymbol ] };
+    key <AC02> { [ NoSymbol, NoSymbol, NoSymbol, NoSymbol ] };
+    key <AC03> { [ NoSymbol, NoSymbol, NoSymbol, NoSymbol ] };
+    key <AC04> { [ NoSymbol, NoSymbol, NoSymbol, NoSymbol ] };
+
+    key <AC05> { [ NoSymbol, NoSymbol, NoSymbol, NoSymbol ] };
+    key <AC06> { [ NoSymbol, NoSymbol, NoSymbol, NoSymbol ] };
+
+    key <AC07> { [ NoSymbol, NoSymbol, NoSymbol, NoSymbol ] };
+    key <AC08> { [ NoSymbol, NoSymbol, NoSymbol, NoSymbol ] };
+    key <AC09> { [ NoSymbol, NoSymbol, NoSymbol, NoSymbol ] };
+    key <AC10> { [ NoSymbol, NoSymbol, NoSymbol, NoSymbol ] };
+
+    key <AC11> { [ dead_acute, dead_diaeresis , NoSymbol, NoSymbol ] };
+    key <AC12> { [ dead_grave, dead_circumflex , NoSymbol, NoSymbol ] };
+
+
+    ////LOWER
+
+    key <AB01> { [ NoSymbol, NoSymbol, NoSymbol, NoSymbol ] };
+    key <AB02> { [ NoSymbol, NoSymbol, NoSymbol, NoSymbol ] };
+    key <AB03> { [ NoSymbol, NoSymbol, NoSymbol, NoSymbol ] };
+    key <AB04> { [ NoSymbol, NoSymbol, NoSymbol, NoSymbol ] };
+
+    key <AB05> { [ NoSymbol, NoSymbol, NoSymbol, NoSymbol ] };
+    key <AB06> { [ NoSymbol, NoSymbol, NoSymbol, NoSymbol ] };
+
+    key <AB07> { [ NoSymbol, NoSymbol, NoSymbol, NoSymbol ] };
+
+    key <AB08> { [ comma, semicolon , NoSymbol, NoSymbol ] };
+    key <AB09> { [ period, colon , NoSymbol, NoSymbol ] };
+    key <AB10> { [ minus, underscore , NoSymbol, NoSymbol ] };
+};
+
+
+partial alphanumeric_keys
+xkb_symbols "qwerty_mod" {
+    
+    //UPPER
+
+    key <AD01> { [ q, Q, NoSymbol, NoSymbol ] };
+    key <AD02> { [ w, W, NoSymbol, NoSymbol ] };
+    key <AD03> { [ e, E, NoSymbol, NoSymbol ] };
+    key <AD04> { [ r, R, NoSymbol, NoSymbol ] };
+
+    key <AD05> { [ t, T , NoSymbol, NoSymbol ] };
+    key <AD06> { [ y, Y, NoSymbol, NoSymbol ] };
+
+    key <AD07> { [ u, U, NoSymbol, NoSymbol ] };
+    key <AD08> { [ i, I, NoSymbol, NoSymbol ] };
+    key <AD09> { [ o, O, NoSymbol, NoSymbol ] };
+    key <AD10> { [ p, P, NoSymbol, NoSymbol ] };
+
+    key <AD11> { [ NoSymbol, NoSymbol, NoSymbol, NoSymbol ] };
+    key <AD12> { [ NoSymbol, NoSymbol, NoSymbol, NoSymbol ] };
+
+
+    ////HOME
+
+    key <AC01> { [ a, A, NoSymbol, NoSymbol ] };
+    key <AC02> { [ s, S, NoSymbol, NoSymbol ] };
+    key <AC03> { [ d, D, NoSymbol, NoSymbol ] };
+    key <AC04> { [ f, F, NoSymbol, NoSymbol ] };
+
+    key <AC05> { [ g, G, NoSymbol, NoSymbol ] };
+    key <AC06> { [ h, H, NoSymbol, NoSymbol ] };
+
+    key <AC07> { [ j, J, NoSymbol, NoSymbol ] };
+    key <AC08> { [ k, K, NoSymbol, NoSymbol ] };
+    key <AC09> { [ l, L, NoSymbol, NoSymbol ] };
+    key <AC10> { [ ntilde, Ntilde , NoSymbol, NoSymbol ] };
+
+    key <AC11> { [ NoSymbol, NoSymbol, NoSymbol, NoSymbol ] };
+    key <AC12> { [ NoSymbol, NoSymbol, NoSymbol, NoSymbol ] };
+
+
+    ////LOWER
+
+    key <AB01> { [ z, Z, NoSymbol, NoSymbol ] };
+    key <AB02> { [ x, X, NoSymbol, NoSymbol ] };
+    key <AB03> { [ c, C, NoSymbol, NoSymbol ] };
+    key <AB04> { [ v, V, NoSymbol, NoSymbol ] };
+
+    key <AB05> { [ b, B , NoSymbol, NoSymbol ] };
+    key <AB06> { [ n, N, NoSymbol, NoSymbol ] };
+
+    key <AB07> { [ m, M , NoSymbol, NoSymbol ] };
+    key <AB08> { [ NoSymbol, NoSymbol, NoSymbol, NoSymbol ] };
+    key <AB09> { [ NoSymbol, NoSymbol, NoSymbol, NoSymbol ] };
+    key <AB10> { [ NoSymbol, NoSymbol, NoSymbol, NoSymbol ] };
+
+
+};
+
+
+partial alphanumeric_keys
+xkb_symbols "colemak_mod" {
+    
+    //UPPER
+
+    key <AD01> { [ q, Q, NoSymbol, NoSymbol ] };
+    key <AD02> { [ w, W, NoSymbol, NoSymbol ] };
+    key <AD03> { [ f, F, NoSymbol, NoSymbol ] };
+    key <AD04> { [ p, P, NoSymbol, NoSymbol ] };
+
+    key <AD05> { [ g, G , NoSymbol, NoSymbol ] };
+    key <AD06> { [ j, J, NoSymbol, NoSymbol ] };
+
+    key <AD07> { [ l, L, NoSymbol, NoSymbol ] };
+    key <AD08> { [ u, U, NoSymbol, NoSymbol ] };
+    key <AD09> { [ y, Y, NoSymbol, NoSymbol ] };
+    key <AD10> { [ ntilde, Ntilde, NoSymbol, NoSymbol ] };
+
+
+    key <AD11> { [ NoSymbol, NoSymbol , NoSymbol, NoSymbol ] };
+    key <AD12> { [ NoSymbol, NoSymbol , NoSymbol, NoSymbol ] };
+
+    ////HOME
+
+    key <AC01> { [ a, A, NoSymbol, NoSymbol ] };
+    key <AC02> { [ r, R, NoSymbol, NoSymbol ] };
+    key <AC03> { [ s, S, NoSymbol, NoSymbol ] };
+    key <AC04> { [ t, T, NoSymbol, NoSymbol ] };
+
+    key <AC05> { [ d, D, NoSymbol, NoSymbol ] };
+    key <AC06> { [ h, H, NoSymbol, NoSymbol ] };
+
+    key <AC07> { [ n, N, NoSymbol, NoSymbol ] };
+    key <AC08> { [ e, E, NoSymbol, NoSymbol ] };
+    key <AC09> { [ i, I, NoSymbol, NoSymbol ] };
+    key <AC10> { [ o, O, NoSymbol, NoSymbol ] };
+
+    key <AC11> { [ NoSymbol, NoSymbol , NoSymbol, NoSymbol ] };
+    key <AC12> { [ NoSymbol, NoSymbol , NoSymbol, NoSymbol ] };
+
+    ////LOWER
+
+    key <AB01> { [ z, Z, NoSymbol, NoSymbol ] };
+    key <AB02> { [ x, X, NoSymbol, NoSymbol ] };
+    key <AB03> { [ c, C, NoSymbol, NoSymbol ] };
+    key <AB04> { [ v, V, NoSymbol, NoSymbol ] };
+
+    key <AB05> { [ b, B , NoSymbol, NoSymbol ] };
+    key <AB06> { [ k, K, NoSymbol, NoSymbol ] };
+
+    key <AB07> { [ m, M , NoSymbol, NoSymbol ] };
+    key <AB08> { [ NoSymbol, NoSymbol , NoSymbol, NoSymbol ] };
+    key <AB09> { [ NoSymbol, NoSymbol , NoSymbol, NoSymbol ] };
+    key <AB10> { [ NoSymbol, NoSymbol , NoSymbol, NoSymbol ] };
+
+};
+
+
+
+
+partial alphanumeric_keys
+xkb_symbols "colemak_dh_mod" {
+    
+    //UPPER
+
+    key <AD01> { [ q, Q, NoSymbol, NoSymbol ] };
+    key <AD02> { [ w, W, NoSymbol, NoSymbol ] };
+    key <AD03> { [ f, F, NoSymbol, NoSymbol ] };
+    key <AD04> { [ p, P, NoSymbol, NoSymbol ] };
+
+    key <AD05> { [ b, B , NoSymbol, NoSymbol ] };
+    key <AD06> { [ j, J, NoSymbol, NoSymbol ] };
+
+    key <AD07> { [ l, L, NoSymbol, NoSymbol ] };
+    key <AD08> { [ u, U, NoSymbol, NoSymbol ] };
+    key <AD09> { [ y, Y, NoSymbol, NoSymbol ] };
+    key <AD10> { [ ntilde, Ntilde, NoSymbol, NoSymbol ] };
+
+
+    key <AD11> { [ NoSymbol, NoSymbol , NoSymbol, NoSymbol ] };
+    key <AD12> { [ NoSymbol, NoSymbol , NoSymbol, NoSymbol ] };
+
+    ////HOME
+
+    key <AC01> { [ a, A, NoSymbol, NoSymbol ] };
+    key <AC02> { [ r, R, NoSymbol, NoSymbol ] };
+    key <AC03> { [ s, S, NoSymbol, NoSymbol ] };
+    key <AC04> { [ t, T, NoSymbol, NoSymbol ] };
+
+    key <AC05> { [ g, G, NoSymbol, NoSymbol ] };
+    key <AC06> { [ m, M, NoSymbol, NoSymbol ] };
+
+    key <AC07> { [ n, N, NoSymbol, NoSymbol ] };
+    key <AC08> { [ e, E, NoSymbol, NoSymbol ] };
+    key <AC09> { [ i, I, NoSymbol, NoSymbol ] };
+    key <AC10> { [ o, O, NoSymbol, NoSymbol ] };
+
+    key <AC11> { [ NoSymbol, NoSymbol , NoSymbol, NoSymbol ] };
+    key <AC12> { [ NoSymbol, NoSymbol , NoSymbol, NoSymbol ] };
+
+    ////LOWER
+
+    key <AB01> { [ x, X, NoSymbol, NoSymbol ] };
+    key <AB02> { [ c, C, NoSymbol, NoSymbol ] };
+    key <AB03> { [ d, D, NoSymbol, NoSymbol ] };
+    key <AB04> { [ v, V, NoSymbol, NoSymbol ] };
+
+    key <AB05> { [ z, Z , NoSymbol, NoSymbol ] };
+    key <AB06> { [ k, K, NoSymbol, NoSymbol ] };
+
+    key <AB07> { [ h, H , NoSymbol, NoSymbol ] };
+    key <AB08> { [ NoSymbol, NoSymbol , NoSymbol, NoSymbol ] };
+    key <AB09> { [ NoSymbol, NoSymbol , NoSymbol, NoSymbol ] };
+    key <AB10> { [ NoSymbol, NoSymbol , NoSymbol, NoSymbol ] };
+
+};
+
+
+partial alphanumeric_keys
+xkb_symbols "canary_mod" {
+    
+    //UPPER
+
+    key <AD01> { [ w, W, NoSymbol, NoSymbol ] };
+    key <AD02> { [ l, L, NoSymbol, NoSymbol ] };
+    key <AD03> { [ y, Y, NoSymbol, NoSymbol ] };
+    key <AD04> { [ p, P, NoSymbol, NoSymbol ] };
+
+    key <AD05> { [ k, K , NoSymbol, NoSymbol ] };
+    key <AD06> { [ z, Z, NoSymbol, NoSymbol ] };
+
+    key <AD07> { [ x, X, NoSymbol, NoSymbol ] };
+    key <AD08> { [ o, O, NoSymbol, NoSymbol ] };
+    key <AD09> { [ u, U, NoSymbol, NoSymbol ] };
+    key <AD10> { [ ntilde, Ntilde, NoSymbol, NoSymbol ] };
+
+
+    key <AD11> { [ NoSymbol, NoSymbol , NoSymbol, NoSymbol ] };
+    key <AD12> { [ NoSymbol, NoSymbol , NoSymbol, NoSymbol ] };
+    key <AC12> { [ NoSymbol, NoSymbol , NoSymbol, NoSymbol ] };
+
+    ////HOME
+
+    key <AC01> { [ c, C, NoSymbol, NoSymbol ] };
+    key <AC02> { [ r, R, NoSymbol, NoSymbol ] };
+    key <AC03> { [ s, S, NoSymbol, NoSymbol ] };
+    key <AC04> { [ t, T, NoSymbol, NoSymbol ] };
+
+    key <AC05> { [ b, B, NoSymbol, NoSymbol ] };
+    key <AC06> { [ f, F, NoSymbol, NoSymbol ] };
+
+    key <AC07> { [ n, N, NoSymbol, NoSymbol ] };
+    key <AC08> { [ e, E, NoSymbol, NoSymbol ] };
+    key <AC09> { [ i, I, NoSymbol, NoSymbol ] };
+    key <AC10> { [ a, A, NoSymbol, NoSymbol ] };
+
+    key <AC11> { [ NoSymbol, NoSymbol , NoSymbol, NoSymbol ] };
+
+    ////LOWER
+
+    key <AB01> { [ j, J, NoSymbol, NoSymbol ] };
+    key <AB02> { [ v, V, NoSymbol, NoSymbol ] };
+    key <AB03> { [ d, D, NoSymbol, NoSymbol ] };
+    key <AB04> { [ g, G, NoSymbol, NoSymbol ] };
+
+    key <AB05> { [ q, Q , NoSymbol, NoSymbol ] };
+    key <AB06> { [ m, M, NoSymbol, NoSymbol ] };
+
+    key <AB07> { [ h, H , NoSymbol, NoSymbol ] };
+    key <AB08> { [ NoSymbol, NoSymbol , NoSymbol, NoSymbol ] };
+    key <AB09> { [ NoSymbol, NoSymbol , NoSymbol, NoSymbol ] };
+    key <AB10> { [ NoSymbol, NoSymbol , NoSymbol, NoSymbol ] };
+
+};
+
+
+partial alphanumeric_keys
+xkb_symbols "altgr" {
+    
+    ////UPPER
+
+    key <AD01> { [ NoSymbol, NoSymbol, at, VoidSymbol ] };
+    key <AD02> { [ NoSymbol, NoSymbol, asciitilde, VoidSymbol ] };
+    key <AD03> { [ NoSymbol, NoSymbol, bar, EuroSign ] };
+    key <AD04> { [ NoSymbol, NoSymbol, ampersand, VoidSymbol ] };
+
+    key <AD05> { [ NoSymbol, NoSymbol, semicolon, VoidSymbol ] };
+    key <AD06> { [ NoSymbol, NoSymbol, VoidSymbol , VoidSymbol ] };
+
+    key <AD07> { [ NoSymbol, NoSymbol, percent, VoidSymbol ] };
+    key <AD08> { [ NoSymbol, NoSymbol, dollar, VoidSymbol ] };
+    key <AD09> { [ NoSymbol, NoSymbol, numbersign, VoidSymbol ] };
+    key <AD10> { [ NoSymbol, NoSymbol, asterisk, VoidSymbol ] }; 
+
+    key <AD11> { [ NoSymbol, NoSymbol, VoidSymbol, VoidSymbol ] };
+    key <AD12> { [ NoSymbol, NoSymbol, VoidSymbol, VoidSymbol ] };
+
+    ////HOME
+
+    key <AC01> { [ NoSymbol, NoSymbol, less, greater ] };
+    key <AC02> { [ NoSymbol, NoSymbol, parenleft, parenright ] };
+    key <AC03> { [ NoSymbol, NoSymbol, bracketleft, bracketright ] };
+    key <AC04> { [ NoSymbol, NoSymbol, braceleft, braceright ] };
+
+    key <AC05> { [ NoSymbol, NoSymbol, colon, VoidSymbol ] };
+    key <AC06> { [ NoSymbol, NoSymbol, equal, VoidSymbol ] };
+
+    key <AC07> { [ NoSymbol, NoSymbol, quotedbl, backslash ] };
+    key <AC08> { [ NoSymbol, NoSymbol, slash, plus ] };
+    key <AC09> { [ NoSymbol, NoSymbol, exclam, exclamdown ] };
+    key <AC10> { [ NoSymbol, NoSymbol, question, questiondown ] };
+
+    key <AC11> { [ NoSymbol, NoSymbol, semicolon, VoidSymbol ] };
+    key <AC12> { [ NoSymbol, NoSymbol, VoidSymbol, VoidSymbol ] };
+
+    ////LOWER
+
+    key <AB01> { [ NoSymbol, NoSymbol, greater , VoidSymbol ] };
+    key <AB02> { [ NoSymbol, NoSymbol, parenright , VoidSymbol ] };
+    key <AB03> { [ NoSymbol, NoSymbol, bracketright , VoidSymbol ] };
+    key <AB04> { [ NoSymbol, NoSymbol, braceright , VoidSymbol ] };
+
+    key <AB05> { [ NoSymbol, NoSymbol, underscore, VoidSymbol ] };
+    key <AB06> { [ NoSymbol, NoSymbol, plus, VoidSymbol ] };
+
+    key <AB07> { [ NoSymbol, NoSymbol, backslash, VoidSymbol ] };
+    key <AB08> { [ NoSymbol, NoSymbol, exclamdown, VoidSymbol ] };
+    key <AB09> { [ NoSymbol, NoSymbol, questiondown, VoidSymbol ] };
+    key <AB10> { [ NoSymbol, NoSymbol, greater, less ] };
+};
+
+partial alphanumeric_keys
+xkb_symbols "swap_caps_with_backspace" {
+    key <CAPS> {
+        //autorepeat = yes,
+        //type[Group1] = "TWO_LEVEL",
+        symbols[Group1] = [       BackSpace,       BackSpace,        Delete,           Delete ]
+        //actions[Group1] = [      NoAction(),      NoAction(),    NoAction(),    NoAction() ]
+    };
+
+    key <BKSP> {
+        autorepeat = yes,
+        type[Group1] = "TWO_LEVEL",
+        symbols[Group1] = [       Caps_Lock,       Caps_Lock,     Caps_Lock,                     Caps_Lock ],
+        actions[Group1] = [      LockMods(modifiers = Lock),      LockMods(modifiers = Lock),    LockMods(modifiers = Lock),    LockMods(modifiers = Lock) ]
+    };
+};
+
+
+partial alphanumeric_keys
+xkb_symbols "tilde_is_backspace" {
+    key <TLDE>    { [ BackSpace ,  BackSpace ,  BackSpace ,  BackSpace ] };
+};
+
+
+xkb_symbols "less_is_shift" {
+    // Make < another shift that turns into AltGr when shifted,
+    // that way you can do a lefthanded altgr by doing LFSH+LSGT 
+    // and then releasing LFSH while still holding LSGT
+    key <LSGT> { [ Shift_L, ISO_Level3_Shift, Shift_L, Shift_L ] };
+
+    key <LFSH> { [ Shift_L, ISO_Level5_Shift, Shift_L, Shift_L ] };
+};

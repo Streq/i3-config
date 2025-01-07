@@ -1,0 +1,8 @@
+#!/bin/zsh
+
+FILE="$(rofi -modi "filebrowser" -show-icons -filebrowser-show-hidden true -filebrowser-command echo -p "select a file" -show filebrowser)"
+
+PROGRAM="$(dmenu_path | rofi -dmenu -i -p "Select a program to run it")"
+
+$PROGRAM "$FILE"
+ 

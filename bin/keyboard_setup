@@ -1,0 +1,9 @@
+#!/bin/bash
+# use my streq setting hell yeah
+setxkbmap streq
+# make caps lock repeatable (cause I use it as backspace)
+xset r 66
+# make keys start repeating faster when held
+xset r rate 250 50
+
+notify-send "keyboard: streq"

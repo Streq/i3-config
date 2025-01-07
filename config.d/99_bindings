@@ -1,0 +1,209 @@
+# q - quit
+bindsym $mod+q kill
+# really kill focused window ```sudo apt install -y xdotool```
+bindsym $mod+Shift+q exec --no-startup-id kill -9 $(xdotool getwindowfocus getwindowpid)
+
+# w - web
+bindsym $mod+w exec google-chrome --profile-directory="Profile 1"
+
+# e - edit config
+bindsym $mod+e exec "code $HOME/.config"
+
+# r - resize
+bindsym $mod+r mode "resize"
+## reload the configuration file
+bindsym $mod+Shift+r reload
+
+# t - change container layout (stacked, tabbed, toggle split)
+bindsym $mod+t layout toggle tabbed splitv splith
+
+# y - exit i3
+bindsym $mod+y exec rofi -modi "afk:lock_commands" -only-match -no-custom -show-icons -drun-show-actions -show afk
+bindsym $mod+Control+Shift+y exec i3-msg exit
+
+# u - restart(update) i3 config
+bindsym $mod+u restart
+
+# i - ?
+#bindsym $mod+i
+
+# o - Open file
+bindsym $mod+o exec thunar
+
+# p - passwords
+# see config for 'v' key
+bindsym $mod+p exec --no-startup-id copyq show passwords
+bindsym $mod+Shift+p exec --no-startup-id xclip -o | copyq tab passwords add
+
+bindsym $mod+Shift+Control+p exec --no-startup-id shutdown --poweroff now
+
+# a - scrAtchpad (no mnemonics sorry)
+bindsym $mod+a scratchpad show
+bindsym $mod+Shift+a move scratchpad
+
+# s - screen settings
+bindsym $mod+s exec "arandr"
+
+# d - draw
+bindsym $mod+d exec "aseprite"
+
+
+# f - fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+# toggle tiling / floating
+bindsym $mod+Shift+f floating toggle
+
+# g - resurrect
+## Resurrect // Enter Restore Mode // <><Shift> s ##  
+bindsym $mod+g mode "restore"
+## Resurrect // Enter Save Mode // <> s ##  
+bindsym $mod+Shift+g mode "save"
+
+# h - horizontal split
+bindsym $mod+h split h
+
+# j - jump focus between tiling / floating windows
+bindsym $mod+j focus mode_toggle
+
+# k - xkill
+bindsym $mod+k exec --no-startup-id i3-sensible-terminal -e xkill
+
+# l - lock
+bindsym $mod+l exec --no-startup-id "i3lock -i $HOME/.config/i3/img/lock.png"
+
+# ñ - ?
+#bindsym $mod+ntilde
+
+# z - focus the child container
+bindsym $mod+z focus child
+
+# x - focus the parent container
+bindsym $mod+x focus parent
+
+# c - capture screen
+## Clipboard Screenshots
+### Selection
+bindsym $mod+c exec --no-startup-id maim --select | xclip -selection clipboard -t image/png
+### Active Window
+bindsym Shift+$mod+c exec --no-startup-id maim --window $(xdotool getactivewindow) | xclip -selection clipboard -t image/png
+### Full Screen
+bindsym Control+Shift+$mod+c exec --no-startup-id maim | xclip -selection clipboard -t image/png
+
+# v - paste using copyq
+#```sudo add-apt-repository -y ppa:hluk/copyq```
+#```sudo apt update```
+#```sudo apt install -y copyq```
+exec copyq
+bindsym $mod+v exec --no-startup-id copyq toggle
+
+# b - open bindings (make sure to "export TERMINAL=yourterminal" on ~/.profile so that i3-sensible-terminal uses that)
+bindsym $mod+b exec i3-sensible-terminal -e 'micro "~/.config/i3/config.d/99_bindings"'
+## bluetooth
+bindsym $mod+Shift+b exec blueman-manager
+
+# n - network manager
+bindsym $mod+n exec "gnome-control-center wifi"
+
+# m - micro ```(curl https://getmic.ro | bash) && sudo mv micro /usr/bin```
+bindsym $mod+m exec i3-sensible-terminal -e "micro" 
+
+# , - 
+#bindsym $mod+,
+
+# . - 
+#bindsym $mod+.
+
+# - - 
+#bindsym $mod+-
+
+# change focus
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+
+# switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+bindsym $mod+$alt+1 move container to workspace number $ws1; workspace number $ws1
+bindsym $mod+$alt+2 move container to workspace number $ws2; workspace number $ws2
+bindsym $mod+$alt+3 move container to workspace number $ws3; workspace number $ws3
+bindsym $mod+$alt+4 move container to workspace number $ws4; workspace number $ws4
+bindsym $mod+$alt+5 move container to workspace number $ws5; workspace number $ws5
+bindsym $mod+$alt+6 move container to workspace number $ws6; workspace number $ws6
+bindsym $mod+$alt+7 move container to workspace number $ws7; workspace number $ws7
+bindsym $mod+$alt+8 move container to workspace number $ws8; workspace number $ws8
+bindsym $mod+$alt+9 move container to workspace number $ws9; workspace number $ws9
+bindsym $mod+$alt+0 move container to workspace number $ws10; workspace number $ws10
+
+bindsym $mod+Shift+Control+Left move workspace to output left
+bindsym $mod+Shift+Control+Down move workspace to output down
+bindsym $mod+Shift+Control+Up move workspace to output up
+bindsym $mod+Shift+Control+Right move workspace to output right
+
+# start a terminal
+bindsym $mod+Return exec i3-sensible-terminal
+
+
+# setup monitor
+bindsym $mod+F2 exec --no-startup-id monitor_setup
+
+# Screenshots ```sudo apt install -y maim xclip```
+bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/$(date)"
+bindsym $mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) "/home/$USER/Pictures/$(date)"
+bindsym Shift+Print exec --no-startup-id maim --select "/home/$USER/Pictures/$(date)"
+
+
+# ```sudo apt install -y rofi```
+bindsym $mod+space exec --no-startup-id "rofi -modi drun,run,filebrowser,window,ssh,keys,windowcd,combi -show-icons -drun-show-actions -show drun"
+
+# ```sudo apt install -y dmenu```
+# add ~/.config/i3/bin to path
+bindsym $mod+Shift+space exec --no-startup-id open_file_with
+
+# make floating
+bindsym $mod+button3 floating toggle
+
+# scroll through windows/workspaces
+bindsym --whole-window --border $mod+button4 focus left
+bindsym --whole-window --border $mod+button5 focus right
+bindsym --whole-window --border $mod+shift+button4 workspace prev
+bindsym --whole-window --border $mod+shift+button5 workspace next
+
+# One handed container navigation
+bindsym $mod+Tab focus next
+# masculine is the key above Tab on my keyboard
+bindsym $mod+masculine focus prev
+
+# One handed workspace navigation
+bindsym $mod+$alt+Tab workspace next
+# masculine is the key above Tab on my keyboard
+bindsym $mod+$alt+masculine workspace prev

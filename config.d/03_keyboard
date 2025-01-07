@@ -1,0 +1,7 @@
+# ```sudo cp "$HOME/.config/i3/xkb/symbols/streq" /usr/share/X11/xkb/symbols/streq```
+
+# use my streq setting hell yeah
+exec --no-startup-id keyboard_setup
+
+# reload keyboard layout
+bindsym $mod+F1 exec --no-startup-id keyboard_setup
