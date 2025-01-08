@@ -1,37 +1,43 @@
 #!/bin/bash
 
 # Main menu options
-logout="Log Out"
+lock="Lock"
 suspend="Suspend"
+logout="Log Out"
+reboot="Reboot"
 poweroff="Power Off"
 
 # If no argument is passed, show the main menu
 if [[ -z "$1" ]]; then
-    echo "$logout"
+    echo "$lock"
     echo "$suspend"
+    echo "$logout"
+    echo "$reboot"
     echo "$poweroff"
     exit 0
 fi
 
 # Handle the selected option
 case "$1" in
+    "$lock")
+        # This coproc trick allows rofi to exit before it finishes,
+        # thus giving up control for the lock to take it
+        coproc ( "lock" >/dev/null 2>&1 )
+        exec 1>&-
+        exit;
+        ;;
     "$logout")
-        if [ "$DESKTOP_SESSION" = "i3" ]; then
-            i3-msg exit
-        elif [ "$DESKTOP_SESSION" = "gnome" ]; then
-            gnome-session-quit --logout --no-prompt
-        elif [ "$DESKTOP_SESSION" = "plasma" ]; then
-            qdbus org.kde.ksmserver /KSMServer logout 0 0 0
-        else
-            notify-send "Log Out failed" "Unsupported desktop environment"
-        fi
+        i3-msg exit
         ;;
     "$suspend")
         systemctl suspend
         ;;
+    "$reboot")
+        systemctl reboot
+        ;;
     "$poweroff")
         systemctl poweroff
-        ;;
+        ;;        
     *)
         exit 0
         ;;

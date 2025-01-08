@@ -5,14 +5,21 @@ bindsym $mod+Shift+q exec --no-startup-id kill -9 $(xdotool getwindowfocus getwi
 
 # w - web
 bindsym $mod+w exec google-chrome --profile-directory="Profile 1"
+## rename workspace
+bindsym $mod+Shift+w exec i3-input -F 'rename workspace to "%s"' -P 'New name: '
+## new workspace
+bindsym $mod+$alt+w exec i3-input -F 'workspace "%s"' -P 'Workspace name: '
+
 
 # e - edit config
 bindsym $mod+e exec "code $HOME/.config"
 
 # r - resize
 bindsym $mod+r mode "resize"
+## resize and center focused floating window
+bindsym $mod+Shift+r resize set 1200 px 800 px, move position center
 ## reload the configuration file
-bindsym $mod+Shift+r reload
+bindsym $mod+$alt+r reload
 
 # t - change container layout (stacked, tabbed, toggle split)
 bindsym $mod+t layout toggle tabbed splitv splith
@@ -24,7 +31,7 @@ bindsym $mod+Control+Shift+y exec i3-msg exit
 # u - restart(update) i3 config
 bindsym $mod+u restart
 
-# i - ?
+# i - ? (system info?)
 #bindsym $mod+i
 
 # o - Open file
@@ -69,7 +76,7 @@ bindsym $mod+j focus mode_toggle
 bindsym $mod+k exec --no-startup-id i3-sensible-terminal -e xkill
 
 # l - lock
-bindsym $mod+l exec --no-startup-id "i3lock -i $HOME/.config/i3/img/lock.png"
+bindsym $mod+l exec --no-startup-id lock
 
 # ñ - ?
 #bindsym $mod+ntilde
@@ -108,13 +115,13 @@ bindsym $mod+n exec "gnome-control-center wifi"
 bindsym $mod+m exec i3-sensible-terminal -e "micro" 
 
 # , - 
-#bindsym $mod+,
+#bindsym $mod+comma
 
 # . - 
-#bindsym $mod+.
+#bindsym $mod+period
 
 # - - 
-#bindsym $mod+-
+#bindsym $mod+minus
 
 # change focus
 bindsym $mod+Left focus left
@@ -200,10 +207,10 @@ bindsym --whole-window --border $mod+shift+button5 workspace next
 
 # One handed container navigation
 bindsym $mod+Tab focus next
-# masculine is the key above Tab on my keyboard
+# "masculine" is the key above Tab on my keyboard
 bindsym $mod+masculine focus prev
 
 # One handed workspace navigation
 bindsym $mod+$alt+Tab workspace next
-# masculine is the key above Tab on my keyboard
+# "masculine" is the key above Tab on my keyboard
 bindsym $mod+$alt+masculine workspace prev
