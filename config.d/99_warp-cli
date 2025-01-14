@@ -1,2 +1,2 @@
-bindsym $mod+Shift+Control+F1 exec --no-startup-id warp-cli connect
-bindsym $mod+Shift+Control+F2 exec --no-startup-id warp-cli disconnect
+bindsym $mod+Shift+Control+F1 exec --no-startup-id warp-cli connect && notify-send "warp-connect: $(warp-cli status)"
+bindsym $mod+Shift+Control+F2 exec --no-startup-id warp-cli disconnect && notify-send "warp-disconnect: $(warp-cli status)"

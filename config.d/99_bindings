@@ -34,8 +34,10 @@ bindsym $mod+u restart
 # i - ? (system info?)
 #bindsym $mod+i
 
-# o - Open file
+# o - Open file browser
 bindsym $mod+o exec thunar
+## Open file browser as sudo
+bindsym $mod+Shift+o exec i3-sensible-terminal -e "sudo thunar"
 
 # p - passwords
 # see config for 'v' key
