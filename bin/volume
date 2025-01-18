@@ -1,0 +1,28 @@
+#!/bin/bash
+
+
+val="$(pactl get-sink-volume @DEFAULT_SINK@ | grep -m1 -P '(\d+%)' -o | tail -1 | grep -m1 -P '(\d+)' -o)"
+
+function get_icon(){
+    case "$(pactl get-sink-mute @DEFAULT_SINK@)" in
+        "Mute: no")
+            if [ $val -ge 80 ]; then
+                echo "🔊"
+                break
+            elif [ $val -ge 40 ]; then
+                echo "🔉"
+            else
+                echo "🔈"
+            fi
+            ;;
+        "Mute: yes")
+            echo "🔇"
+            ;;
+        *)
+            exit 0
+            ;;
+    esac
+}
+
+
+echo "$(get_icon) $val%"

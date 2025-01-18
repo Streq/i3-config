@@ -1,43 +1,46 @@
 # resize window (you can also use the mouse for that)
 mode "resize" {
+        set $speed_resize 20
+        set $speed_resize_shift 1
+        set $speed_move 20
+        set $speed_move_shift 1
+        
+        
         # Resize
-        set $vr 20
-        bindsym Left resize shrink right $vr px or $vr ppt
-        bindsym Right resize grow right $vr px or $vr ppt
-        bindsym Up resize shrink down $vr px or $vr ppt
-        bindsym Down resize grow down $vr px or $vr ppt
+        bindsym Left resize shrink width $speed_resize px or $speed_resize ppt
+        bindsym Right resize grow width $speed_resize px or $speed_resize ppt
+        bindsym Up resize shrink height $speed_resize px or $speed_resize ppt
+        bindsym Down resize grow height $speed_resize px or $speed_resize ppt
 
-        bindsym $alt+Left resize grow left $vr px or $vr ppt
-        bindsym $alt+Right resize shrink left $vr px or $vr ppt
-        bindsym $alt+Up resize grow up $vr px or $vr ppt
-        bindsym $alt+Down resize shrink up $vr px or $vr ppt
+        bindsym $alt+Left resize grow left $speed_resize px or $speed_resize ppt
+        bindsym $alt+Right resize shrink left $speed_resize px or $speed_resize ppt
+        bindsym $alt+Up resize grow up $speed_resize px or $speed_resize ppt
+        bindsym $alt+Down resize shrink up $speed_resize px or $speed_resize ppt
 
-        set $vrs 1
-        bindsym Shift+Left resize shrink right $vrs px or $vrs ppt
-        bindsym Shift+Right resize grow right $vrs px or $vrs ppt
-        bindsym Shift+Up resize shrink down $vrs px or $vrs ppt
-        bindsym Shift+Down resize grow down $vrs px or $vrs ppt
+        bindsym Shift+Left resize shrink right $speed_resize_shift px or $speed_resize_shift ppt
+        bindsym Shift+Right resize grow right $speed_resize_shift px or $speed_resize_shift ppt
+        bindsym Shift+Up resize shrink down $speed_resize_shift px or $speed_resize_shift ppt
+        bindsym Shift+Down resize grow down $speed_resize_shift px or $speed_resize_shift ppt
 
-        bindsym Shift+$alt+Left resize grow left $vrs px or $vrs ppt
-        bindsym Shift+$alt+Right resize shrink left $vrs px or $vrs ppt
-        bindsym Shift+$alt+Up resize grow up $vrs px or $vrs ppt
-        bindsym Shift+$alt+Down resize shrink up $vrs px or $vrs ppt
+        bindsym Shift+$alt+Left resize grow left $speed_resize_shift px or $speed_resize_shift ppt
+        bindsym Shift+$alt+Right resize shrink left $speed_resize_shift px or $speed_resize_shift ppt
+        bindsym Shift+$alt+Up resize grow up $speed_resize_shift px or $speed_resize_shift ppt
+        bindsym Shift+$alt+Down resize shrink up $speed_resize_shift px or $speed_resize_shift ppt
 
         # Move
-        set $v 20
-        bindsym Control+Left resize shrink right $v; resize grow left $v;
-        bindsym Control+Right resize shrink left $v; resize grow right $v;
-        bindsym Control+Up resize shrink down $v; resize grow up $v;
-        bindsym Control+Down resize shrink up $v; resize grow down $v;
+        bindsym Control+Left resize shrink right $speed_move; resize grow left $speed_move;
+        bindsym Control+Right resize shrink left $speed_move; resize grow right $speed_move;
+        bindsym Control+Up resize shrink down $speed_move; resize grow up $speed_move;
+        bindsym Control+Down resize shrink up $speed_move; resize grow down $speed_move;
 
-        set $vs 1
-        bindsym Control+Shift+Left resize shrink right $vs; resize grow left $vs;
-        bindsym Control+Shift+Right resize shrink left $vs; resize grow right $vs;
-        bindsym Control+Shift+Up resize shrink down $vs; resize grow up $vs;
-        bindsym Control+Shift+Down resize shrink up $vs; resize grow down $vs;
+        bindsym Control+Shift+Left resize shrink right $speed_move_shift; resize grow left $speed_move_shift;
+        bindsym Control+Shift+Right resize shrink left $speed_move_shift; resize grow right $speed_move_shift;
+        bindsym Control+Shift+Up resize shrink down $speed_move_shift; resize grow up $speed_move_shift;
+        bindsym Control+Shift+Down resize shrink up $speed_move_shift; resize grow down $speed_move_shift;
 
         # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
         bindsym Escape mode "default"
         bindsym r mode "default"
+        bindsym $mod+r mode "default"
 }

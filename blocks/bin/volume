@@ -1,0 +1,9 @@
+#!/bin/bash
+case $BLOCK_BUTTON in
+  1) pavucontrol ;;
+  3) volume_mute ;;  # right click, mute/unmute
+  4) volume_down ;; # scroll up, increase
+  5) volume_up ;; # scroll down, decrease
+esac
+
+volume
