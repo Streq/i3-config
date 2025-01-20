@@ -25,8 +25,25 @@
 # The top properties below are applied to every block, but can be overridden.
 # Each block command defaults to the script name to avoid boilerplate.
 command=$HOME/.config/i3/blocks/bin/$BLOCK_NAME
-separator_block_width=15
+separator_block_width=12
 markup=none
+
+[wifi]
+label=📡
+instance=wlp0s20f3
+interval=10
+separator=false
+
+[iface]
+separator=false
+instance=wlp0s20f3
+color="#00FF00"
+interval=10
+
+[bandwidth]
+#instance=eth0
+interval=5
+
 
 # Disk usage
 #
@@ -37,7 +54,7 @@ markup=none
 label=💾
 instance=/
 interval=30
-
+min_width=1000G (1000G)/1000G
 
 # Memory usage
 #
@@ -51,27 +68,6 @@ label=SWAP
 instance=swap
 interval=30
 
-
-# Network interface monitoring
-#
-# If the instance is not specified, use the interface used for default route.
-# The address can be forced to IPv4 or IPv6 with -4 or -6 switches.
-[iface]
-label=📡
-instance=wlp0s20f3
-color="#00FF00"
-interval=10
-
-[wifi]
-label=📡
-instance=wlp0s20f3
-interval=10
-
-[bandwidth]
-label=💻-💻
-#instance=eth0
-interval=5
-
 # CPU usage
 #
 # The script may be called with -w and -c switches to specify thresholds,
@@ -84,13 +80,10 @@ min_width=CPU: 100.00%
 [load_average]
 interval=10
 
-# Battery indicator
-#
-# The battery instance defaults to 0.
 [battery]
-
 interval=30
-
+min_width=🔌🚫 100% (00:00)
+align=right
 
 # Generic media player support
 #
@@ -107,22 +100,14 @@ signal=10
 #[openvpn]
 #interval=20
 
-# Temperature
-#
-# Support multiple chips, though lm-sensors.
-# The script may be called with -w and -c switches to specify thresholds,
-# see the script for details.
 [temperature]
 label=🌡
 interval=10
 
-
 [volume]
 interval=once
 signal=10
+min_width=🔊100%
 
-
-# Date Time
-#
 [time]
 interval=5

@@ -49,6 +49,8 @@ $short_text = $full_text;
 
 if ($acpi =~ /(\d\d:\d\d):/) {
 	$full_text .= " ($1)";
+} else {
+	$full_text .= " (00:00)";
 }
 
 # print text

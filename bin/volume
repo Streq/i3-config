@@ -25,4 +25,4 @@ function get_icon(){
 }
 
 
-echo "$(get_icon) $val%"
+echo "$(get_icon)$val%"
