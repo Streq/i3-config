@@ -1,0 +1,2 @@
+#!/bin/bash
+toggle-service "lock-on-screen-blank.service"

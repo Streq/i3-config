@@ -1,0 +1,9 @@
+[Unit]
+Description=Lock screen on blank
+
+[Service]
+Type=simple
+ExecStart=xss-lock --transfer-sleep-lock -- lock --nofork
+
+[Install]
+WantedBy=default.target

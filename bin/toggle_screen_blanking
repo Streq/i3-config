@@ -1,0 +1,9 @@
+#!/bin/bash
+ENABLED=$(xset q | grep "DPMS is Enabled" | wc -l)
+if [ "$ENABLED" -eq "1" ]; then
+    xset -dpms
+    notify-send-short "screen blanking: off"
+else
+    xset dpms
+    notify-send-short "screen blanking: on"
+fi

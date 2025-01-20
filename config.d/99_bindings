@@ -32,7 +32,7 @@ bindsym $mod+Control+Shift+y exec i3-msg exit
 bindsym $mod+u restart
 
 # i - ? (system info?)
-#bindsym $mod+i
+bindsym $mod+i exec i3-sensible-terminal -e "btop"
 
 # o - Open file browser
 bindsym $mod+o exec thunar
@@ -52,6 +52,8 @@ bindsym $mod+Shift+a move scratchpad
 
 # s - screen settings
 bindsym $mod+s exec "arandr"
+## toggle screen blanking
+bindsym $mod+Shift+s exec "toggle_screen_blanking"
 
 # d - draw
 bindsym $mod+d exec "aseprite"
@@ -63,9 +65,9 @@ bindsym $mod+f fullscreen toggle
 bindsym $mod+Shift+f floating toggle
 
 # g - resurrect
-## Resurrect // Enter Restore Mode // <><Shift> s ##  
+## Resurrect // Enter Restore Mode  
 bindsym $mod+g mode "restore"
-## Resurrect // Enter Save Mode // <> s ##  
+## Resurrect // Enter Save Mode
 bindsym $mod+Shift+g mode "save"
 
 # h - horizontal split
@@ -79,6 +81,7 @@ bindsym $mod+k exec --no-startup-id i3-sensible-terminal -e xkill
 
 # l - lock
 bindsym $mod+l exec --no-startup-id lock
+bindsym $mod+Shift+l exec --no-startup-id toggle_lock_on_blank
 
 # ñ - ?
 #bindsym $mod+ntilde
