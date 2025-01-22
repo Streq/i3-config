@@ -43,10 +43,14 @@ END {
 	mf=mem_free/1024/1024
 	mt=mem_total/1024/1024
 	mu=mt-mf
+#	if (type == "swap")
+#		printf("%.1fG (%.1fG)/%.1fG\n%.1fG\n", sf, su, st, su)
+#	else
+#		printf("%.1fG (%.1fG)/%.1fG\n%.1fG\n", mf, mu, mt, mf)
 	if (type == "swap")
-		printf("%.1fG (%.1fG)/%.1fG\n%.1fG\n", sf, su, st, su)
+		printf("%.1fG\n", su)
 	else
-		printf("%.1fG (%.1fG)/%.1fG\n%.1fG\n", mf, mu, mt, mf)
+		printf("%.1fG\n", mf)
 	# TODO: color (if less than X%)
 }
 ' /proc/meminfo

@@ -35,14 +35,13 @@ interval=10
 separator=false
 
 [iface]
-separator=false
 instance=wlp0s20f3
 color="#00FF00"
 interval=10
 
-[bandwidth]
+#[bandwidth]
 #instance=eth0
-interval=5
+#interval=5
 
 
 # Disk usage
@@ -54,17 +53,17 @@ interval=5
 label=💾
 instance=/
 interval=30
-min_width=1000G (1000G)/1000G
 
 # Memory usage
 #
 # The type defaults to "mem" if the instance is not specified.
 [memory]
-label=🧠
+label=🐏
 interval=30
+separator=false
 
 [memory]
-label=SWAP
+label=SWP
 instance=swap
 interval=30
 
@@ -73,17 +72,17 @@ interval=30
 # The script may be called with -w and -c switches to specify thresholds,
 # see the script for details.
 [cpu_usage]
-label=CPU
+label=🧠
+separator=false
 interval=10
-min_width=CPU: 100.00%
+min_width=100.00%
 
 [load_average]
+separator=false
 interval=10
 
-[battery]
-interval=30
-min_width=🔌🚫 100% (00:00)
-align=right
+[cpu_heaviest]
+interval=10
 
 # Generic media player support
 #
@@ -101,13 +100,21 @@ signal=10
 #interval=20
 
 [temperature]
-label=🌡
+label=🌡fixme
 interval=10
+
+[battery]
+interval=30
+align=right
 
 [volume]
 interval=once
 signal=10
 min_width=🔊100%
+
+[stopwatch]
+label=⏰
+interval=1
 
 [time]
 interval=5

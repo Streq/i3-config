@@ -132,7 +132,7 @@ xkb_symbols "punctuation" {
     key <AC10> { [ NoSymbol, NoSymbol, NoSymbol, NoSymbol ] };
 
     key <AC11> { [ dead_acute, dead_diaeresis , NoSymbol, NoSymbol ] };
-    key <AC12> { [ dead_grave, dead_circumflex , NoSymbol, NoSymbol ] };
+    key <AC12> { [ grave, asciicircum , NoSymbol, NoSymbol ] };
 
 
     ////LOWER
@@ -426,7 +426,7 @@ xkb_symbols "altgr" {
     key <AC10> { [ NoSymbol, NoSymbol, question, questiondown ] };
 
     key <AC11> { [ NoSymbol, NoSymbol, semicolon, VoidSymbol ] };
-    key <AC12> { [ NoSymbol, NoSymbol, VoidSymbol, VoidSymbol ] };
+    key <AC12> { [ NoSymbol, NoSymbol, dead_grave, dead_circumflex ] };
 
     ////LOWER
 

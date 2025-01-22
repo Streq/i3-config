@@ -1,0 +1,17 @@
+#!/bin/bash
+FILE=~/.pomodoro
+EMPTY="00:00:00"
+
+
+case $BLOCK_BUTTON in
+  1) echo "$(date +%s)" > $FILE; echo $EMPTY; exit 0 ;;
+  3) rm $FILE; echo $EMPTY; exit 0 ;;
+esac
+
+if ! [ -f $FILE ]; then 
+    echo "$EMPTY"
+else
+    start="$(cat $FILE)"
+    time="$(($(date +%s) - $start))"
+    echo "$(date -u -d "@$time" +%H:%M:%S)"
+    #paplay /usr/share/sounds/Yaru/stereo/audio-volume-change.oga

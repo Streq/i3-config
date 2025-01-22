@@ -39,9 +39,9 @@ $percent = $2;
 if ($status eq 'Discharging') {
 	$full_text .= '🔋';
 } elsif ($status eq 'Charging') {
-	$full_text .= '🔌⚡';
+	$full_text .= '⚡';
 } elsif ($status eq 'Not charging') {
-	$full_text .= '🔌🚫';
+	$full_text .= '🔌';
 }
 $full_text .= " $percent%";
 
