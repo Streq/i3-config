@@ -39,18 +39,21 @@ mode "resize" {
         bindsym Control+Shift+Down resize shrink up $speed_move_shift; resize grow down $speed_move_shift;
 
         # Move to corners
-        # 789
-        # 456
         # 123
-        bindsym 1 exec --no-startup-id move_to_corner bottom-left;
-        bindsym 2 exec --no-startup-id move_to_corner bottom;
-        bindsym 3 exec --no-startup-id move_to_corner bottom-right;
+        # 456
+        # 789
+        bindsym 1 exec --no-startup-id move_to_corner top-left;
+        bindsym 2 exec --no-startup-id move_to_corner top;
+        bindsym 3 exec --no-startup-id move_to_corner top-right;
         bindsym 4 exec --no-startup-id move_to_corner left;
         bindsym 5 exec --no-startup-id move_to_corner center;
         bindsym 6 exec --no-startup-id move_to_corner right;
-        bindsym 7 exec --no-startup-id move_to_corner top-left;
-        bindsym 8 exec --no-startup-id move_to_corner top;
-        bindsym 9 exec --no-startup-id move_to_corner top-right;
+        bindsym 7 exec --no-startup-id move_to_corner bottom-left;
+        bindsym 8 exec --no-startup-id move_to_corner bottom;
+        bindsym 9 exec --no-startup-id move_to_corner bottom-right;
+
+        # sticky
+        bindsym s sticky toggle;
 
 
         # back to normal: Enter or Escape or $mod+r

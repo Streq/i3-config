@@ -17,7 +17,7 @@ bindsym $mod+e exec "code $HOME/.config"
 # r - resize
 bindsym $mod+r mode "resize"
 ## resize and center focused floating window
-bindsym $mod+Shift+r resize set 960 px 540 px, move position center
+bindsym $mod+Shift+r resize set 1200 px 900 px, move position center
 ## reload the configuration file
 bindsym $mod+$alt+r reload
 
