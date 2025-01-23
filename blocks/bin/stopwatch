@@ -1,6 +1,12 @@
 #!/bin/bash
-FILE=~/.stopwatch
-ACCUM_FILE=~/.stopwatch_accum
+BASE_PATH="~/.stopwatch/"
+TASK="${1:-work}"
+ACTION="${2:-get}"
+
+
+
+
+ACCUM_FILE=accum
 EMPTY="00:00:00"
 TIME=0
 ICON=""
@@ -32,7 +38,7 @@ init () {
 
 toggle () {
   if (( $RUNNING == 1 )); then
-    pause;
+    off;
   else
     on;
   fi
@@ -44,20 +50,29 @@ on () {
 }
 
 off () {
-  reset_accum;
-  rm $FILE;
-}
-
-pause () {
   echo "$TIME" > $ACCUM_FILE;
   rm $FILE
 }
 
+delete () {
+  reset_accum;
+  rm $FILE;
+}
+
 init
 
+# TODO
+
 case $BLOCK_BUTTON in
-  1) toggle ;;
-  3) off ;;
+  1) TASK=toggle ;;
+  3) TASK=delete ;;
+esac
+
+case $TASK in
+  toggle) toggle ;;
+  off) off ;;
+  on) on ;;
+  pause) pause ;;
 esac
 
 if ! [ -z "$BLOCK_BUTTON" ]; then

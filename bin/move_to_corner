@@ -1,0 +1,111 @@
+#!/bin/bash
+
+# Ensure that xdotool is installed
+if ! command -v xdotool &>/dev/null; then
+  echo "Error: xdotool is not installed."
+  exit 1
+fi
+
+# Ensure a parameter is provided
+if [ -z "$1" ]; then
+  echo "Usage: $0 <corner>"
+  echo "<corner> can be one of: top-left, top-right, bottom-left, bottom-right"
+  exit 1
+fi
+
+corner=$1
+
+# Get screen dimensions
+screen_width=$(xdotool getdisplaygeometry | awk '{print $1}')
+screen_height=$(xdotool getdisplaygeometry | awk '{print $2}')
+
+# Get currently focused window
+window_id=$(xdotool getactivewindow)
+if [ -z "$window_id" ]; then
+  echo "Error: No active window found."
+  exit 1
+fi
+
+# Get window geometry (width, height, and offsets for decorations)
+win_geometry=$(xdotool getwindowgeometry --shell "$window_id")
+eval $win_geometry
+
+# Adjust the window height to ensure it stays within the screen boundaries
+adjusted_height=$((screen_height - HEIGHT))
+if [ "$adjusted_height" -lt 0 ]; then
+  adjusted_height=0
+fi
+
+# Calculate positions based on the corner
+case $corner in
+  center)
+    x=$((screen_width/2 - WIDTH/2))
+    y=$(($adjusted_height/2))
+    ;;
+  top-left)
+    x=0
+    y=0
+    ;;
+  top)
+    x=$((screen_width/2 - WIDTH/2))
+    y=0
+    ;;
+  top-right)
+    x=$((screen_width - WIDTH))
+    y=0
+    ;;
+  left)
+    x=0
+    y=$(($adjusted_height/2))
+    ;;
+  right)
+    x=$((screen_width - WIDTH))
+    y=$(($adjusted_height/2))
+    ;;
+  bottom-left)
+    x=0
+    y=$adjusted_height
+    ;;
+  bottom)
+    x=$((screen_width/2 - WIDTH/2))
+    y=$adjusted_height
+    ;;
+  bottom-right)
+    x=$((screen_width - WIDTH))
+    y=$adjusted_height
+    ;;
+  *)
+    echo "Invalid corner: $corner"
+    echo "Valid corners are: top-left, top-right, bottom-left, bottom-right"
+    exit 1
+    ;;
+esac
+
+count=0
+MAX_COUNT=3
+
+# Move the window
+#xdotool windowmove "$window_id" "$x" "$y"
+i3-msg "move position $x $y"
+
+# fix for floating containers (works for tabbed only)
+while [[ "$?" == "2" && "$count" != "$MAX_COUNT" ]]; do
+  count=$(($count+1))
+  echo "count:$count"
+  i3-msg "focus parent"
+  titlebar_h=0
+  if [[ $y != 0 ]]; then
+    titlebar_h=18
+  fi
+  echo "DEBUG: move position $x $(($y - $titlebar_h * $count))"
+  i3-msg "move position $x $(($y + $titlebar_h * $count))"
+done
+while [[ "$count" != "0" ]]; do
+  echo "count:$count"
+  count=$(($count-1))
+  i3-msg "focus child"
+done
+
+
+
+echo "Moved window to $corner."

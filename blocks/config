@@ -112,9 +112,9 @@ interval=once
 signal=10
 min_width=🔊100%
 
-[stopwatch]
-label=⏰
-interval=1
+#[stopwatch]
+#label=⏰
+#interval=1
 
 [time]
 interval=5
