@@ -1,0 +1,10 @@
+#!/bin/bash
+
+str="$(pactl get-sink-volume @DEFAULT_SINK@)"
+regex="([0-9]+)%"
+if [[ $str =~ $regex ]]
+then
+    val="${BASH_REMATCH[1]}"
+    echo $val
+fi
+

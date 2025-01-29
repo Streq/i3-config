@@ -1,6 +1,8 @@
 #!/bin/bash
+
 case $BLOCK_BUTTON in
   1) pavucontrol ;;
+  2) rounded=$(( $(volume_pts)/5*5 )); capped=$(( rounded > 100 ? 100 : rounded )); volume_offset $capped ;;  # middle click, round to 5
   3) volume_mute ;;  # right click, mute/unmute
   4) volume_down ;; # scroll up, increase
   5) volume_up ;; # scroll down, decrease

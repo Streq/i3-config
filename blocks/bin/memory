@@ -43,18 +43,27 @@ END {
 	mf=mem_free/1024/1024
 	mt=mem_total/1024/1024
 	mu=mt-mf
-	if (type == "swap")
+	if (type == "swap") {
 		printf("%.1fG\n%.1fG\n", su, su)
-	else
+		if (su == st){
+			printf("#FFFF00\n#FF0000\n")
+		}
+	} else {
 		printf("%.1fG\n%.1fG\n", mf, mf)
-	if (type != "swap" && mf < 4)
-		printf("#FFFF00\n#FF0000\n")
-	if (type == "swap" && su == st)
-		printf("#FFFF00\n#FF0000\n")
+		ratio=mf/mt
+		if ( ratio < 0.1 ) {
+			printf("#FF00\n#FFFF00\n")
+		} else if ( ratio < 0.25 ) {
+			printf("#FFFF00\n#FF0000\n")
+		} else if ( ratio < 0.5 ) {
+			printf("#FFFF00\n")
+		} else if ( ratio < 0.75 ) {
+			printf("#FFFF77\n")
+		}
+	}
 
 }
 ' /proc/meminfo
-
 
 case $BLOCK_BUTTON in
   1) i3-sensible-terminal -e btop ;;

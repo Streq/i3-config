@@ -36,7 +36,6 @@ separator=false
 
 [iface]
 instance=wlp0s20f3
-color="#00FF00"
 interval=10
 
 #[bandwidth]
@@ -100,12 +99,23 @@ signal=10
 #interval=20
 
 [temperature]
-label=🌡fixme
+label=🌡
+interval=10
+separator=false
+
+[fan]
+label=🌬
+min_width="1000"
 interval=10
 
 [battery]
 interval=30
 align=right
+
+[brightness]
+interval=once
+signal=10
+min_width=🔆100%
 
 [volume]
 interval=once
