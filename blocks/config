@@ -64,13 +64,13 @@ interval=30
 # The type defaults to "mem" if the instance is not specified.
 [memory]
 label=🐏
-interval=30
+interval=5
 separator=false
 
 [memory]
 label=SWP
 instance=swap
-interval=30
+interval=5
 
 # CPU usage
 #
@@ -79,15 +79,15 @@ interval=30
 [cpu_usage]
 label=🧠
 separator=false
-interval=10
+interval=5
 min_width=100.00%
 
 [load_average]
 separator=false
-interval=10
+interval=5
 
 [cpu_heaviest]
-interval=10
+interval=5
 
 # Generic media player support
 #

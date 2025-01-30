@@ -447,13 +447,15 @@ xkb_symbols "altgr" {
 partial alphanumeric_keys
 xkb_symbols "swap_caps_with_backspace" {
     key <CAPS> {
-        //autorepeat = yes,
-        //type[Group1] = "TWO_LEVEL",
         symbols[Group1] = [       BackSpace,       BackSpace,        Delete,           Delete ]
-        //actions[Group1] = [      NoAction(),      NoAction(),    NoAction(),    NoAction() ]
     };
 
     key <BKSP> {
+        autorepeat = yes,
+        symbols[Group1] = [       BackSpace,       BackSpace,        Delete,           Delete ]
+    };
+
+    key <RTSH> {
         autorepeat = yes,
         type[Group1] = "TWO_LEVEL",
         symbols[Group1] = [       Caps_Lock,       Caps_Lock,     Caps_Lock,                     Caps_Lock ],

@@ -3,6 +3,7 @@
 setxkbmap streq
 # make caps lock repeatable (cause I use it as backspace)
 xset r 66
+xset r 22
 # make keys start repeating faster when held
 xset r rate 250 50
 

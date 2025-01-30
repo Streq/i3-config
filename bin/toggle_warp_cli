@@ -4,6 +4,7 @@ str="$(warp-cli status)"
 regex="Status update: Disconnected"
 if [[ $str =~ $regex ]]; then
     warp-cli connect
+    get_warp_url
 else 
     warp-cli disconnect
 fi
