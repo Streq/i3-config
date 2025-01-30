@@ -1,0 +1,12 @@
+#!/bin/bash
+
+str="$(warp-cli status)"
+regex="Status update: Disconnected"
+if [[ $str =~ $regex ]]; then
+    warp-cli connect
+else 
+    warp-cli disconnect
+fi
+
+notify-send "warp-connect: $(warp-cli status)"
+pkill -RTMIN+10 i3blocks

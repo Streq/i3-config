@@ -38,6 +38,12 @@ separator=false
 instance=wlp0s20f3
 interval=10
 
+[warp]
+interval=once
+label=warp: 
+signal=10
+separator=false
+
 #[bandwidth]
 #instance=eth0
 #interval=5

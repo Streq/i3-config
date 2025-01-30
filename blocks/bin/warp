@@ -1,0 +1,17 @@
+#!/bin/bash
+
+case $BLOCK_BUTTON in
+  1) toggle_warp_cli &> /dev/null ;;
+esac
+
+str="$(warp-cli status)"
+regex="Status update: (\w+)"
+if [[ $str =~ $regex ]]; then
+    v="${BASH_REMATCH[1]}"
+    echo "$v"
+    echo "$v"
+else
+    echo "error"
+    echo "error"
+    echo "#FF0000"
+fi
