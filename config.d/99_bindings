@@ -195,11 +195,12 @@ bindsym Shift+Print exec --no-startup-id maim --select "/home/$USER/Pictures/$(d
 
 
 # ```sudo apt install -y rofi```
+# add ~/.config/i3/bin to path
 bindsym $mod+space exec --no-startup-id "rofi -modi drun,run,filebrowser,window,ssh,keys,windowcd,combi -show-icons -drun-show-actions -show drun"
 
-# ```sudo apt install -y dmenu```
-# add ~/.config/i3/bin to path
-bindsym $mod+Shift+space exec --no-startup-id open_file_with
+## send i3blocks reload signal
+bindsym $mod+$alt+space exec --no-startup-id "$refresh_i3bar_full"
+
 
 # make floating
 bindsym $mod+button3 floating toggle

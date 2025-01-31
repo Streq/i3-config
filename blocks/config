@@ -27,6 +27,7 @@
 command=$HOME/.config/i3/blocks/bin/$BLOCK_NAME
 separator_block_width=12
 markup=none
+signal=12
 
 [wifi]
 label=📡
