@@ -4,5 +4,5 @@
 # Setup nitrogen
 # ```sudo apt install -y nitrogen```
 
-# start picom(compositor), the monitor layout(script setting up double monitors), and nitrogen, in that order
-exec --no-startup-id picom -b && monitor_setup && nitrogen --restore
+# start picom(compositor), the monitor layout(script setting up double monitors), and feh, in that order
+exec --no-startup-id picom -b && monitor_setup

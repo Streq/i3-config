@@ -1,0 +1,8 @@
+[Unit]
+Description=Tell the time every %i minutes
+PartOf=graphical-session.target
+ConditionEnvironment=DISPLAY
+
+[Service]
+Type=exec
+ExecStart=/home/santiagorequena/.config/i3/bin/notify_time

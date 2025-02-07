@@ -38,12 +38,12 @@ separator=false
 [iface]
 instance=wlp0s20f3
 interval=10
+separator=false
 
 [warp]
 interval=once
 label=warp: 
 signal=10
-separator=false
 
 #[bandwidth]
 #instance=eth0

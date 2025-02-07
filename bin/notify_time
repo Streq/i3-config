@@ -1,0 +1,2 @@
+#!/bin/bash
+notify-send -t 3000 "And now, the time:" "<span size='x-large'>$(date +%H:%M)</span>" && paplay /usr/share/sounds/Yaru/stereo/bell.oga

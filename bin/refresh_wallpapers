@@ -1,0 +1,9 @@
+#!/bin/bash
+hour=$(date +%H)
+time=day
+if (( $hour > 18 || $hour < 7 )); then
+    time=night
+fi
+
+feh --bg-fill "$(shuf -e -n1 ~/wallpapers/$time/*)"
+

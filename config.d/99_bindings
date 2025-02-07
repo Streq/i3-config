@@ -23,6 +23,7 @@ bindsym $mod+$alt+r reload
 
 # t - change container layout (stacked, tabbed, toggle split)
 bindsym $mod+t layout toggle tabbed splitv splith
+bindsym $mod+Shift+t exec --no-startup-id toggle-service "tell-time@1.timer"
 
 # y - exit i3
 bindsym $mod+y exec rofi -modi "afk:lock_commands" -only-match -no-custom -show-icons -drun-show-actions -show afk
@@ -54,6 +55,7 @@ bindsym $mod+Shift+a move scratchpad
 bindsym $mod+s exec "arandr"
 ## toggle screen blanking
 bindsym $mod+Shift+s exec "toggle_screen_blanking"
+bindsym $mod+$alt+s sticky toggle;
 
 # d - draw
 bindsym $mod+d exec "aseprite"
@@ -95,7 +97,7 @@ bindsym $mod+x focus parent
 # c - capture screen
 ## Clipboard Screenshots
 ### Selection
-bindsym $mod+c exec --no-startup-id maim --select | xclip -selection clipboard -t image/png
+bindsym $mod+c exec --no-startup-id maim --select --hidecursor | xclip -selection clipboard -t image/png
 ### Active Window
 bindsym Shift+$mod+c exec --no-startup-id maim --window $(xdotool getactivewindow) | xclip -selection clipboard -t image/png
 ### Full Screen
@@ -108,8 +110,11 @@ bindsym Control+Shift+$mod+c exec --no-startup-id maim | xclip -selection clipbo
 exec copyq
 bindsym $mod+v exec --no-startup-id copyq toggle
 
-# b - open bindings (make sure to "export TERMINAL=yourterminal" on ~/.profile so that i3-sensible-terminal uses that)
-bindsym $mod+b exec i3-sensible-terminal -e 'micro "~/.config/i3/config.d/99_bindings"'
+# b - open bindings/shortcuts/hotkeys 
+## (make sure to "export TERMINAL=yourterminal" on ~/.profile so that i3-sensible-terminal uses that)
+bindsym $mod+b exec i3-sensible-terminal -e 'less ~/.config/i3/config.d/99_bindings'
+#bindsym $mod+b exec show_shortcuts
+bindsym $mod+$alt+b exec i3-sensible-terminal -e 'code ~/.config/i3/config.d/99_bindings'
 ## bluetooth
 bindsym $mod+Shift+b exec blueman-manager
 
@@ -190,8 +195,8 @@ bindsym $mod+F2 exec --no-startup-id monitor_setup
 
 # Screenshots ```sudo apt install -y maim xclip```
 bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/$(date)"
-bindsym $mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) "/home/$USER/Pictures/$(date)"
-bindsym Shift+Print exec --no-startup-id maim --select "/home/$USER/Pictures/$(date)"
+bindsym $mod+Print exec --no-startup-id maim --select -u | feh --auto-zoom - &
+bindsym Shift+Print exec --no-startup-id maim --select -u "/home/$USER/Pictures/$(date)"
 
 
 # ```sudo apt install -y rofi```

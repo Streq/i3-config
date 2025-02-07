@@ -49,16 +49,15 @@ END {
 			printf("#FFFF00\n#FF0000\n")
 		}
 	} else {
-		printf("%.1fG\n%.1fG\n", mf, mf)
-		ratio=mf/mt
-		if ( ratio < 0.1 ) {
-			printf("#FF00\n#FFFF00\n")
-		} else if ( ratio < 0.25 ) {
+		percent=mf*100/mt
+		printf("%.1f\%(%.1fG)\n%.1fG\n", percent, mf, mf)
+		
+		if ( percent < 10 ) {
+			printf("#FF0000\n#FFFF00\n")
+		} else if ( percent < 25 ) {
 			printf("#FFFF00\n#FF0000\n")
-		} else if ( ratio < 0.5 ) {
+		} else if ( percent < 50 ) {
 			printf("#FFFF00\n")
-		} else if ( ratio < 0.75 ) {
-			printf("#FFFF77\n")
 		}
 	}
 
