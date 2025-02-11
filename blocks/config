@@ -124,10 +124,14 @@ interval=once
 signal=10
 min_width=🔆100%
 
+
 [volume]
+interval=persist
+separator=false
+
+[volctl]
 interval=once
-signal=10
-min_width=🔊100%
+
 
 #[stopwatch]
 #label=⏰

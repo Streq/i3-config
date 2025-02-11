@@ -23,7 +23,8 @@ bindsym $mod+$alt+r reload
 
 # t - change container layout (stacked, tabbed, toggle split)
 bindsym $mod+t layout toggle tabbed splitv splith
-bindsym $mod+Shift+t exec --no-startup-id toggle-service "tell-time@1.timer"
+#bindsym $mod+Shift+t exec --no-startup-id toggle-service "tell-time@1.timer"
+bindsym $mod+Shift+t exec rofi -modi "tell-time:time_notif_commands" -only-match -no-custom -show-icons -drun-show-actions -show tell-time
 
 # y - exit i3
 bindsym $mod+y exec rofi -modi "afk:lock_commands" -only-match -no-custom -show-icons -drun-show-actions -show afk

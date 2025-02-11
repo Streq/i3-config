@@ -4,10 +4,12 @@ str="$(warp-cli status)"
 regex="Status update: Disconnected"
 if [[ $str =~ $regex ]]; then
     warp-cli connect
-    get_warp_url
+    $(sleep 1 && get_warp_url) &
 else 
     warp-cli disconnect
 fi
 
 notify-send "warp-connect: $(warp-cli status)"
+
+
 pkill -RTMIN+10 i3blocks

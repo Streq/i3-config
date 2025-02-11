@@ -1,0 +1,27 @@
+#!/bin/bash
+corner=$1
+
+i3-msg -t subscribe -m '[ "window" ]' | while read line ; do echo $line; echo "\n"; done
+
+
+ID="$(i3-msg -t get_tree | jq '.. | .nodes? + .floating_nodes? | .[]? | select(.focused) | .id')"
+
+FLOATING_PARENT="$(i3-msg -t get_tree | jq '.. | .nodes? + .floating_nodes? | .[]? | select((.floating=="user_on" or .floating=="auto_on") and (.focused or (.. | .nodes? + .floating_nodes? | .[]? | .focused)))')"
+
+# Get currently focused window
+if [ -z "$FLOATING_PARENT" ]; then
+  echo "Error: No active floating window found."
+  exit 1
+fi
+
+# Get screen dimensions
+# TODO get them using i3-msg -t get_tree and jq
+SCREEN_WIDTH=$(xdotool getdisplaygeometry | awk '{print $1}')
+SCREEN_HEIGHT=$(xdotool getdisplaygeometry | awk '{print $2}')
+
+
+ID="$(echo "$FLOATING_PARENT" | jq '.id')"
+WIDTH="$(echo "$FLOATING_PARENT" | jq '.rect.width')"
+HEIGHT="$(echo "$FLOATING_PARENT" | jq '.rect.height')"
+
+i3-msg "[con_id=$ID] move position $x $y"

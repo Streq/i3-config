@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Main menu options
+
+
+function status(){
+    echo "$1: $(systemctl --user is-active tell-time@$1.timer)"
+}
+
+# If no argument is passed, show the main menu
+if [[ -z "$1" ]]; then
+    echo "$(status 1)"
+    echo "$(status 5)"
+    echo "$(status 15)"
+    echo "$(status 30)"
+    echo "$(status 60)"
+    exit 0
+fi
+
+str="$1"
+regex="([0-9]+):"
+if [[ $str =~ $regex ]]
+then
+    num="${BASH_REMATCH[1]}"
+fi
+
+
+# Handle the selected option
+toggle-service tell-time@$num.timer

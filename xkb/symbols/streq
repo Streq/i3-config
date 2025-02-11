@@ -458,8 +458,8 @@ xkb_symbols "swap_caps_with_backspace" {
     key <RTSH> {
         autorepeat = yes,
         type[Group1] = "TWO_LEVEL",
-        symbols[Group1] = [       Caps_Lock,       Caps_Lock,     Caps_Lock,                     Caps_Lock ],
-        actions[Group1] = [      LockMods(modifiers = Lock),      LockMods(modifiers = Lock),    LockMods(modifiers = Lock),    LockMods(modifiers = Lock) ]
+        symbols[Group1] = [       Shift_R,       Caps_Lock,     Caps_Lock,                     Caps_Lock ],
+        actions[Group1] = [      SetMods(modifiers = Shift),      LockMods(modifiers = Lock),    LockMods(modifiers = Lock),    LockMods(modifiers = Lock) ]
     };
 };
 

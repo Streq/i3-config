@@ -1,0 +1,3 @@
+#!/bin/bash
+
+~/.config/i3/blocks/bin/volume -S -F "🖱" -f "🖱"
