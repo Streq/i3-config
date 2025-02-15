@@ -1,0 +1,139 @@
+#!/bin/bash
+BASE_PATH="$HOME/.stopwatch/"
+ACTION="get"
+
+usage()
+{
+    echo "usage: stopwatch [ -p path ] [ start | stop | delete | add HH:MM:SS ]"
+}
+
+
+while [ "$1" != "" ]; do
+	case $1 in
+		-p | --path ) 
+			shift
+			BASE_PATH="$1" 
+			;;
+    -h | --help )
+      usage
+      exit
+      ;;
+    add )
+      ACTION="$1"
+			shift
+      ADDED_TIME="$1"
+      ;;
+    sub )
+      ACTION="$1"
+			shift
+      ADDED_TIME="$1"
+      ;;
+		* )
+			ACTION="$1"
+			;;
+	esac
+  shift
+done
+
+ACCUM_FILE="${BASE_PATH}accum"
+FILE="${BASE_PATH}start"
+
+
+
+EMPTY="00:00:00"
+TIME=0
+ICON=""
+RUNNING=0
+ACCUM=0
+
+reset_accum () {
+  echo "0" > $ACCUM_FILE;  
+}
+
+epoch () {
+  date +%s
+}
+
+init () {
+  mkdir -p $BASE_PATH
+  if ! [ -f $ACCUM_FILE ]; then 
+    reset_accum
+  fi
+  ACCUM="$(cat $ACCUM_FILE)"
+  if ! [ -f $FILE ]; then 
+    RUNNING=0
+    TIME="$ACCUM"
+  else
+    RUNNING=1
+    local start="$(cat $FILE)"
+    TIME="$(($(epoch) - $start + $ACCUM))"
+  fi
+}
+
+get_icon () {
+  if (( $RUNNING == 0 )); then 
+    echo "⏸"
+  else
+    echo "▶"
+  fi
+
+}
+
+toggle () {
+  if (( $RUNNING == 1 )); then
+    off;
+  else
+    on;
+  fi
+}
+
+on () {
+  if (( $RUNNING == 1 )); then
+    return
+  fi
+  echo "$TIME" > $ACCUM_FILE;
+  echo "$(epoch)" > $FILE;
+  RUNNING=1
+}
+
+off () {
+  if (( $RUNNING == 0 )); then
+    return
+  fi
+  echo "$TIME" > $ACCUM_FILE;
+  rm $FILE
+  RUNNING=0
+}
+
+delete () {
+  reset_accum;
+  rm $FILE;
+}
+
+add () {
+  local seconds=$(date -u -d "1970-01-01 $1" +"%s")
+  ACCUM="$(($ACCUM + $seconds))"
+  echo "$ACCUM" > $ACCUM_FILE;
+  TIME="$(($TIME + $seconds))"
+}
+sub () {
+  local seconds=$(date -u -d "1970-01-01 $1" +"%s")
+  ACCUM="$(($ACCUM - $seconds))"
+  echo "$ACCUM" > $ACCUM_FILE;
+  TIME="$(($TIME - $seconds))"
+}
+
+init
+
+case $ACTION in
+  toggle) toggle ;;
+  on | start) on ;;
+  pause | stop | off) off ;;
+  reset | delete) delete ;;
+  add) add $ADDED_TIME ;;
+  sub) sub $ADDED_TIME ;;
+esac
+
+ICON="$(get_icon)"
+
+echo "$ICON $(date -u -d "@$TIME" +%H:%M:%S)"
