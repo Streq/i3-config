@@ -2,9 +2,11 @@
 BASE_PATH="$HOME/.stopwatch/"
 ACTION="get"
 
+
+
 usage()
 {
-    echo "usage: stopwatch [ -p path ] [ start | stop | delete | add HH:MM:SS ]"
+    echo "usage: stopwatch [ [ -p | --path ] path ] [ -h | --help | start | stop | delete | add SECONDS | sub SECONDS | history ]"
 }
 
 
@@ -37,6 +39,8 @@ done
 
 ACCUM_FILE="${BASE_PATH}accum"
 FILE="${BASE_PATH}start"
+HISTORY_FILE="${BASE_PATH}history"
+
 
 
 
@@ -45,14 +49,12 @@ TIME=0
 ICON=""
 RUNNING=0
 ACCUM=0
+EPOCH="$(date +%s)"
 
 reset_accum () {
   echo "0" > $ACCUM_FILE;  
 }
 
-epoch () {
-  date +%s
-}
 
 init () {
   mkdir -p $BASE_PATH
@@ -66,15 +68,15 @@ init () {
   else
     RUNNING=1
     local start="$(cat $FILE)"
-    TIME="$(($(epoch) - $start + $ACCUM))"
+    TIME="$(($EPOCH - $start + $ACCUM))"
   fi
 }
 
-get_icon () {
+get_state () {
   if (( $RUNNING == 0 )); then 
-    echo "⏸"
+    echo "stopped"
   else
-    echo "▶"
+    echo "running"
   fi
 
 }
@@ -92,7 +94,7 @@ on () {
     return
   fi
   echo "$TIME" > $ACCUM_FILE;
-  echo "$(epoch)" > $FILE;
+  echo "$EPOCH" > $FILE;
   RUNNING=1
 }
 
@@ -107,33 +109,71 @@ off () {
 
 delete () {
   reset_accum;
-  rm $FILE;
+  rm $FILE &> /dev/null;
+  TIME=0
+  RUNNING=0
 }
 
 add () {
-  local seconds=$(date -u -d "1970-01-01 $1" +"%s")
+  #local seconds=$(date -u -d "1970-01-01 $1" +"%s")
+  local seconds=$1
   ACCUM="$(($ACCUM + $seconds))"
   echo "$ACCUM" > $ACCUM_FILE;
   TIME="$(($TIME + $seconds))"
 }
+
 sub () {
-  local seconds=$(date -u -d "1970-01-01 $1" +"%s")
+  local seconds=$1
   ACCUM="$(($ACCUM - $seconds))"
   echo "$ACCUM" > $ACCUM_FILE;
   TIME="$(($TIME - $seconds))"
 }
 
+log_to_history () {
+
+  local action=$ACTION
+  if ! [ -z "$ADDED_TIME" ]; then
+    action="$action $ADDED_TIME" 
+  fi
+
+  echo "$EPOCH,$action" >> $HISTORY_FILE
+}
+
+
+get() {
+  echo "state:$STATE,time:$(date -u -d "@$TIME" +%s)"
+}
+
 init
 
+if [ "$ACTION" == "toggle" ]; then
+  if [ $RUNNING == 1 ]; then
+    ACTION=stop
+  else
+    ACTION=start
+  fi
+elif [ "$ACTION" == "start" ] && [ $RUNNING == 1 ]; then
+  ACTION=get
+elif [ "$ACTION" == "stop" ] && [ $RUNNING == 0 ]; then
+  ACTION=get
+fi
+
 case $ACTION in
-  toggle) toggle ;;
-  on | start) on ;;
-  pause | stop | off) off ;;
-  reset | delete) delete ;;
+  start) on ;;
+  stop) off ;;
+  delete) delete ;;
   add) add $ADDED_TIME ;;
   sub) sub $ADDED_TIME ;;
+  history) cat $HISTORY_FILE; exit ;;
+  get) ;;
+  *) usage; exit ;;
 esac
 
-ICON="$(get_icon)"
+STATE="$(get_state)"
 
-echo "$ICON $(date -u -d "@$TIME" +%H:%M:%S)"
+if [ $ACTION != "get" ]; then
+  log_to_history
+fi
+
+# echo "state:$STATE, time:$(date -u -d "@$TIME" +%H:%M:%S)"
+get

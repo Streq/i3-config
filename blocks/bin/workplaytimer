@@ -1,0 +1,78 @@
+#!/bin/bash
+
+# format while WORK will be "⏱!=HH:MM:SS 💤 =HH:MM:SS  ⏳=HH:MM:SS"
+# format while PLAY will be "⏱ =HH:MM:SS 💤!=HH:MM:SS  ⏳=HH:MM:SS"
+# format while OFF will be "⏱💤⏳"
+# when clicked, a goal time can be selected
+# Actions:
+# - work
+# - play
+# - stop
+# - erase
+
+case $BLOCK_BUTTON in
+  1) STR=$(workplaytimer toggle) ;;
+  2) STR=$(workplaytimer delete) ;;
+  3) STR=$(workplaytimer stop) ;;
+  *) STR=$(workplaytimer) ;;
+esac
+
+
+get_line(){
+  echo "$(icon $STATE)$(format $TIME)"
+}
+TIME=
+STATE=
+GOAL_TIME=
+GOAL=
+
+extract(){
+  local activity="$1"
+  local regex="activity:${activity},state:([a-z]+),time:([0-9]+)"
+  if [[ $STR =~ $regex ]]; then
+    STATE="${BASH_REMATCH[1]}"
+    TIME="${BASH_REMATCH[2]}"
+  else 
+    STATE=stopped
+    TIME=0
+  fi
+}
+extract_goal(){
+  local regex="([0-9]+),(.*)"
+  if [[ $STR =~ $regex ]]; then
+    GOAL_TIME="${BASH_REMATCH[1]}"
+    GOAL="${BASH_REMATCH[2]}"
+  else
+    GOAL_TIME=0
+    GOAL=""
+  fi
+}
+
+
+format () {
+  echo "$(date -u -d "@$1" +%H:%M:%S)"
+}
+
+
+icon () {
+  if [ "$1" == "running" ]; then
+    echo 🟢
+  else
+    echo 🔸
+  fi
+}
+
+extract_goal
+
+extract WORK
+WORK_TIME=$TIME
+WORK_LINE=$(get_line)
+extract PLAY
+PLAY_LINE=$(get_line)
+REMAINDER=$(($GOAL_TIME - $WORK_TIME))
+
+if [ $REMAINDER -lt 0 ]; then
+  REMAINDER=0
+fi
+
+echo "$GOAL $(format $REMAINDER) 👷$WORK_LINE 💤$PLAY_LINE"

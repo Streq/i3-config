@@ -1,0 +1,93 @@
+#!/bin/bash
+
+# format while WORK will be "⏱!=HH:MM:SS 💤 =HH:MM:SS  ⏳=HH:MM:SS"
+# format while PLAY will be "⏱ =HH:MM:SS 💤!=HH:MM:SS  ⏳=HH:MM:SS"
+# format while OFF will be "⏱💤⏳"
+# when clicked, a goal time can be selected
+# Actions:
+# - work
+# - play
+# - stop
+# - toggle
+# - delete
+# - goal ACTIVITY GOAL
+
+
+STATE=OFF
+
+BASE_PATH="${HOME}/.workplaytimer/"
+WORK_PATH="${BASE_PATH}work/"
+PLAY_PATH="${BASE_PATH}play/"
+GOAL_PATH="${BASE_PATH}goal"
+
+ACTION="$1"
+
+STATE=
+
+if [ -f "${WORK_PATH}start" ]; then
+  STATE=WORK
+elif [ -f "${PLAY_PATH}start" ]; then
+  STATE=PLAY
+else
+  STATE=STOP
+fi
+
+toggle(){
+  if [ "$STATE" = "PLAY" ] || [ "$STATE" = "STOP" ]; then
+    work;
+  else
+    play;
+  fi
+}
+
+set_work(){
+  echo "activity:WORK,$(stopwatch -p "$WORK_PATH" "$1")"
+}
+
+set_play(){
+  echo "activity:PLAY,$(stopwatch -p "$PLAY_PATH" "$1")"
+}
+
+
+work(){
+  set_work start
+  set_play stop
+}
+
+play(){
+  set_work stop
+  set_play start
+}
+
+stop(){
+  set_work stop
+  set_play stop
+}
+
+delete(){
+  set_work delete
+  set_play delete
+}
+
+show(){
+  set_work
+  set_play
+}
+
+goal(){
+  local activity=$1
+  local time=$2
+  echo "$time,$activity" > $GOAL_PATH
+}
+
+
+case $ACTION in
+  toggle) toggle ;;
+  work) work ;;
+  play) play ;;
+  stop) stop ;;
+  delete) delete ;;
+  goal) goal "$2" "$3" ;;
+  *) show ;;
+esac
+cat $GOAL_PATH

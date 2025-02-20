@@ -8,9 +8,12 @@ xkb_symbols "base" {
     include "streq(altgr)"
 
     //mods
-    include "streq(swap_caps_with_backspace)"
+    include "streq(caps_is_backspace)"
+    include "streq(backspace_is_caps)"
+    include "streq(right_shift_is_down)"
+    include "streq(less_is_altgr)"
+    
     //include "streq(tilde_is_backspace)"
-    // include "streq(less_is_shift)"
     
     include "streq(i3_switch_layout_key)"
 
@@ -445,16 +448,23 @@ xkb_symbols "altgr" {
 };
 
 partial alphanumeric_keys
-xkb_symbols "swap_caps_with_backspace" {
+xkb_symbols "caps_is_backspace" {
     key <CAPS> {
         symbols[Group1] = [       BackSpace,       BackSpace,        Delete,           Delete ]
     };
+};
 
+
+partial alphanumeric_keys
+xkb_symbols "backspace_is_caps" {
     key <BKSP> {
-        autorepeat = yes,
-        symbols[Group1] = [       BackSpace,       BackSpace,        Delete,           Delete ]
+        symbols[Group1] = [       Caps_Lock,       Caps_Lock,     Caps_Lock,                     Caps_Lock ],
+        actions[Group1] = [      LockMods(modifiers = Lock),      LockMods(modifiers = Lock),    LockMods(modifiers = Lock),    LockMods(modifiers = Lock) ]
     };
+};
 
+partial alphanumeric_keys
+xkb_symbols "double_shift_is_capslock" {
     key <RTSH> {
         autorepeat = yes,
         type[Group1] = "TWO_LEVEL",
@@ -462,7 +472,6 @@ xkb_symbols "swap_caps_with_backspace" {
         actions[Group1] = [      SetMods(modifiers = Shift),      LockMods(modifiers = Lock),    LockMods(modifiers = Lock),    LockMods(modifiers = Lock) ]
     };
 };
-
 
 partial alphanumeric_keys
 xkb_symbols "tilde_is_backspace" {
@@ -477,4 +486,20 @@ xkb_symbols "less_is_shift" {
     key <LSGT> { [ Shift_L, ISO_Level3_Shift, Shift_L, Shift_L ] };
 
     key <LFSH> { [ Shift_L, ISO_Level5_Shift, Shift_L, Shift_L ] };
+};
+
+
+xkb_symbols "less_is_altgr" {
+    // Make < another altgr
+    key <LSGT> { [ ISO_Level3_Shift, ISO_Level3_Shift, ISO_Level3_Shift, ISO_Level3_Shift ] };
+};
+
+
+
+xkb_symbols "right_shift_is_down" {
+    // Make right shift the down key so that I can move down 
+    // without pressing the gotdamn down arrow key which is too far from my pinky
+    key <RTSH> { 
+        symbols[Group1] = [ Down, Down, Down, Down ] 
+    };
 };

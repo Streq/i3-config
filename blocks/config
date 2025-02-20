@@ -133,9 +133,8 @@ separator=false
 interval=once
 
 
-#[stopwatch]
-#label=⏰
-#interval=1
+[workplaytimer]
+interval=1
 
 [time]
 interval=5

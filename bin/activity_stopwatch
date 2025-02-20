@@ -1,0 +1,67 @@
+#!/bin/bash
+FILE="$HOME/.activity_stopwatch"
+ACTION="get"
+
+usage()
+{
+    echo "usage: activity_stopwatch [ [ -p | --path ] path ] [ -h | --help | start ACTIVITY | stop ACTIVITY | add SECONDS ACTIVITY | sub SECONDS ACTIVITY | history ]"
+}
+
+
+while [ "$1" != "" ]; do
+	case $1 in
+		-p | --path ) 
+			shift
+			FILE="$1" 
+			;;
+    -h | --help )
+      usage
+      exit
+      ;;
+    add | sub )
+      ACTION="$1"
+			shift
+      ADDED_TIME="$1"
+      shift
+      ACTIVITY="$1"
+      ;;
+		* )
+			ACTION="$1"
+      shift
+      ACTIVITY="$1"
+			;;
+	esac
+  shift
+done
+
+EPOCH="$(date +%s)"
+
+mkfile() { mkdir -p "$(dirname "$1")" && touch "$1" ; }
+
+init () {
+  mkfile $FILE
+}
+
+find_last_action() {
+  local regex="\d+,(stop|start),(?:$1)"
+  perl -lne "print \$1 if /$regex/" $FILE | tail -n1
+}
+
+log_to_history () {
+  local action="$EPOCH,$ACTION"
+  if ! [ -z "$ADDED_TIME" ]; then
+    action="$action $ADDED_TIME" 
+  fi
+  if ! [ -z "$ACTIVITY" ]; then
+    action="$action,$ACTIVITY" 
+  fi
+  echo "$action" >> $FILE
+}
+
+init
+
+case $ACTION in
+  start | stop | add | sub ) log_to_history ;;
+  history ) cat $FILE; exit ;;
+  * ) usage; exit ;;
+esac
