@@ -52,9 +52,9 @@ END {
 		percent=mf*100/mt
 		printf("%.1f\%(%.1fG)\n%.1fG\n", percent, mf, mf)
 		
-		if ( percent < 10 ) {
+		if ( percent < 15 ) {
 			printf("#FF0000\n#FFFF00\n")
-		} else if ( percent < 25 ) {
+		} else if ( percent < 30 ) {
 			printf("#FFFF00\n#FF0000\n")
 		} else if ( percent < 50 ) {
 			printf("#FFFF00\n")

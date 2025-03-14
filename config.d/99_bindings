@@ -12,7 +12,8 @@ bindsym $mod+$alt+w exec i3-input -F 'workspace "%s"' -P 'Workspace name: '
 
 
 # e - edit config
-bindsym $mod+e exec "code $HOME/.config"
+bindsym $mod+e exec "code $HOME/.config/i3"
+bindsym $mod+Shift+e exec "code $HOME/.config"
 
 # r - resize
 bindsym $mod+r mode "resize"
@@ -110,6 +111,8 @@ bindsym Control+Shift+$mod+c exec --no-startup-id maim | xclip -selection clipbo
 #```sudo apt install -y copyq```
 exec copyq
 bindsym $mod+v exec --no-startup-id copyq toggle
+## gif recording
+bindsym Shift+$mod+v exec --no-startup-id peek
 
 # b - open bindings/shortcuts/hotkeys 
 ## (make sure to "export TERMINAL=yourterminal" on ~/.profile so that i3-sensible-terminal uses that)
@@ -181,6 +184,19 @@ bindsym $mod+$alt+7 move container to workspace number $ws7; workspace number $w
 bindsym $mod+$alt+8 move container to workspace number $ws8; workspace number $ws8
 bindsym $mod+$alt+9 move container to workspace number $ws9; workspace number $ws9
 bindsym $mod+$alt+0 move container to workspace number $ws10; workspace number $ws10
+
+# move workspace to focused
+
+bindsym $mod+Shift+Control+1 [workspace=$ws1] move workspace current
+bindsym $mod+Shift+Control+2 [workspace=$ws2] move workspace current
+bindsym $mod+Shift+Control+3 [workspace=$ws3] move workspace current
+bindsym $mod+Shift+Control+4 [workspace=$ws4] move workspace current
+bindsym $mod+Shift+Control+5 [workspace=$ws5] move workspace current
+bindsym $mod+Shift+Control+6 [workspace=$ws6] move workspace current
+bindsym $mod+Shift+Control+7 [workspace=$ws7] move workspace current
+bindsym $mod+Shift+Control+8 [workspace=$ws8] move workspace current
+bindsym $mod+Shift+Control+9 [workspace=$ws9] move workspace current
+bindsym $mod+Shift+Control+0 [workspace=$ws10] move workspace current
 
 bindsym $mod+Shift+Control+Left move workspace to output left
 bindsym $mod+Shift+Control+Down move workspace to output down
