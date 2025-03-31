@@ -1,0 +1,17 @@
+#!/bin/bash
+
+port="$1"
+
+# Run netstat and extract the PID using Perl regex
+pid=$(netstat -plten | perl -nE 'say $1 if /:'"$port"'\s+\S+\s+\S+\s+\d+\s+\d+\s+(\d+)/')
+
+# Debugging output
+echo "Extracted PID: $pid"
+
+# If PID exists, kill the process
+if [[ -n "$pid" ]]; then
+    kill -9 "$pid"
+    echo "Killed process $pid"
+else
+    echo "Process not found on port $port"
+fi

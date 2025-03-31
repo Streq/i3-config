@@ -77,8 +77,8 @@ bindsym $mod+Shift+g mode "save"
 # h - horizontal split
 bindsym $mod+h split h
 
-# j - jump focus between tiling / floating windows
-bindsym $mod+j focus mode_toggle
+# j - focus the parent container
+bindsym $mod+j focus parent
 
 # k - xkill
 bindsym $mod+k exec --no-startup-id i3-sensible-terminal -e xkill
@@ -93,8 +93,8 @@ bindsym $mod+Shift+l exec --no-startup-id toggle_lock_on_blank
 # z - focus the child container
 bindsym $mod+z focus child
 
-# x - focus the parent container
-bindsym $mod+x focus parent
+# x - jump focus between tiling / floating windows
+bindsym $mod+x focus mode_toggle
 
 # c - capture screen
 ## Clipboard Screenshots
